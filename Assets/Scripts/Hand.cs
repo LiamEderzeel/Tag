@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fast : Characters {
+public class Hand : Characters {
 
-	// Additional mechanics
+	// Additional specific mechanics
 
 	// Use this for initialization
 	void Start () {

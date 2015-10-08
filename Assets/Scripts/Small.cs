@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Small : Characters {
 
+	// Additional mechanics
+
+
 	// Use this for initialization
 	void Start () {
 	

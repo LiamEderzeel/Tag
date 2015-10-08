@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Big : Characters {
 
+	// Additional mechanics
+
+
 	// Use this for initialization
 	void Start () {
 	
