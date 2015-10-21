@@ -6,37 +6,31 @@ public class GameManager : MonoBehaviour {
 	public enum GameState {Menu, Game}
 	private static GameState _gameState;
 	public string _selectedLevel = "level_1";
-	
-	void Awake () {
 
+	private void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
 	}
 
-	void Update () {
-		//switch(_gameState)
-		//{
-		//case GameState.Menu:
-		//	break;
-		//case GameState.Game:
-		//	break;
-		//}
-	}
-
-	public void ToMenu ()
-	{
-		ResetState();
+	private void Update()
+    {
 		//_menuTicket.SetActive(true);
 	}
-	
-	public void ToGame ()
+
+	private void _changeState(GameState newGameState)
 	{
-		ResetState();
-		Application.LoadLevel(_selectedLevel);
-	}
-	
-	private static void ResetState()
-	{
-		//_menuMain.SetActive(false);
 		//_menuTicket.SetActive(false);
-		//_menuInfo.SetActive(false);
+        if(newGameState == GameState.Menu)
+        {
+        }
+        else if(newGameState == GameState.Game)
+        {
+            Application.LoadLevel(_selectedLevel);
+        }
 	}
+
+    public void ToGame()
+    {
+        _changeState(GameState.Game);
+    }
 }
