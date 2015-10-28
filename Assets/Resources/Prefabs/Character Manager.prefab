@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &139108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 494152}
+  - 114: {fileID: 11455178}
+  m_Layer: 0
+  m_Name: Character Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494152
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11455178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b314655daf57aeb4595000e7ab8be971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 0}
+  big: {fileID: 0}
+  fast: {fileID: 0}
+  small: {fileID: 0}
+  totPlayers: 4
+  moveSpeed: 20
+  turnSpeed: 20
+  characterPrefabs:
+  - {fileID: 121858, guid: eabffa4aae778d641aea212c44caff0e, type: 2}
+  - {fileID: 166278, guid: bc239eeb526a87047affb2e1403966ae, type: 2}
+  - {fileID: 165388, guid: 9f4890a5c7749284b8359f541eff9c1c, type: 2}
+  - {fileID: 115758, guid: 946dd6b9b34fcd342a8c4696f02cb76e, type: 2}
+  spawnPoints:
+  - {fileID: 11412758, guid: de7f997058fb0b141a87a81efc7a0524, type: 2}
+  - {fileID: 11458574, guid: ad02cd12c2310f24490613f37f533ce1, type: 2}
+  - {fileID: 11488340, guid: e12ad17f36de71b418fb0d2bac69224d, type: 2}
+  - {fileID: 11412694, guid: ede3fafd063c8dc45a1b423dd0baa867, type: 2}
+  - {fileID: 11466006, guid: eac890fa0fef5a64690afa1903afaa03, type: 2}
+  players: 
+  chosenCharacter: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 139108}
+  m_IsPrefabParent: 1
