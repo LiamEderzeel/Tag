@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Big : Characters {
 
-	// Additional mechanics
+public class Big : Character {
+
+	//additional mechanics & stats
 
 
-	// Use this for initialization
-	void Start () {
-	
+	#region Variables
+	//public:
+	//private:
+	#endregion
+
+
+	void Start () 
+	{
+		moveSpeed *= 0.75f;
+		turnSpeed *= 0.75f;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+
+	void Update () 
+	{
 	}
 }

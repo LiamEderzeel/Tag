@@ -1,17 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Hand : Characters {
 
-	// Additional specific mechanics
+public class Hand : Character {
 
-	// Use this for initialization
-	void Start () {
+	//additional mechanics & stats
+
 	
+	#region Variables
+	//public:
+	//private:
+	#endregion
+	
+	
+	void Start () 
+	{
+		moveSpeed *= 1.5f;
+		turnSpeed *= 1.5f;
 	}
 	
-	// Update is called once per frame
-	void Update () {
 	
+	void Update () 
+	{
+
 	}
+
 }

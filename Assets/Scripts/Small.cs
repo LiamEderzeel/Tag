@@ -1,18 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Small : Characters {
 
-	// Additional mechanics
+public class Small : Character {
 
-
-	// Use this for initialization
-	void Start () {
+	//additional mechanics & stats
 	
+	
+	#region Variables
+	//public:
+	//private:
+	#endregion
+	
+	
+	void Start () 
+	{
+		moveSpeed *= 1.0f;
+		turnSpeed *= 1.0f;
 	}
 	
-	// Update is called once per frame
-	void Update () {
 	
+	void Update () 
+	{
 	}
+
 }
