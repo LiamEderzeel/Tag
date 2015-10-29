@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -238,6 +236,11 @@ MonoBehaviour:
   - {fileID: 11470600, guid: bc239eeb526a87047affb2e1403966ae, type: 2}
   - {fileID: 11425544, guid: 9f4890a5c7749284b8359f541eff9c1c, type: 2}
   - {fileID: 11405816, guid: 946dd6b9b34fcd342a8c4696f02cb76e, type: 2}
+  meshList:
+  - {fileID: 4300002, guid: 7ff189ed72df9f34e9bc8f6b486feac8, type: 3}
+  - {fileID: 4300004, guid: 7233a4738d35bf247bd2dda04844e4ad, type: 3}
+  - {fileID: 4300000, guid: f23f8d5e9baa241bbbfa6358eccd3e47, type: 3}
+  - {fileID: 4300002, guid: da02b06baac6c8a4c8b7c11e2691762f, type: 3}
   players:
   - {fileID: 0}
   - {fileID: 0}

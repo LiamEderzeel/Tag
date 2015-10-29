@@ -18,7 +18,8 @@ public class CameraTurner : MonoBehaviour {
         CameraTurn (t);
     }
 
-    void CameraTurn(float t){
+    void CameraTurn(float t)
+	{
         transform.position = new Vector3(_radius * Mathf.Cos(t), _height , _radius * Mathf.Sin(t));
         transform.LookAt(_lookAt);
     }

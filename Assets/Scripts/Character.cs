@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent (typeof (Rigidbody))]
+[RequireComponent (typeof (MeshRenderer))]
+[RequireComponent (typeof (MeshFilter))]
+[RequireComponent (typeof (MeshCollider))]
 
-//[RequireComponent (typeof (Rigidbody))]
 public class Character : MonoBehaviour {
 
 	//player basic movement & spawn
@@ -21,14 +24,16 @@ public class Character : MonoBehaviour {
 	private Transform _transform;
 
 	public bool isAssigned;
-	#endregion
 
-	void Awake()
+
+    #endregion
+
+	private void Awake()
 	{
 		IsAssigned = false;
 	}
 
-	void Start () 
+	private void Start () 
 	{
 		_transform = this.GetComponent<Transform> ();
 
@@ -53,5 +58,4 @@ public class Character : MonoBehaviour {
 	{
 		this.rB = prefab.GetComponent<Rigidbody> ();
 	}
-
 }

@@ -6,12 +6,12 @@ public class CharacterFactory : MonoBehaviour{
 	public int numPlayers;
 	public Player player;
 	public Character[] characterList = new Character[4];
+	public Mesh[] meshList = new Mesh[4];
 	public Player[] players;
 	public SpawnPoint[] spawnPoints = new SpawnPoint[5];
-
-
-	// Use this for initialization
-	void Start () {
+	
+	void Awake ()
+	{
 		//Debug.Log ("Assigning Characters...");
 		for (int i = 0; i < numPlayers; i++)
 		{
@@ -21,14 +21,15 @@ public class CharacterFactory : MonoBehaviour{
 		//SpawnCharacters ();
 	}
 
-	protected void AssignCharacters(){
+	protected void AssignCharacters()
+	{
 		int r = Random.Range(0,players.Length);
 		players[r].Character = characterList[0];
 		characterList[0].IsAssigned = true;
 		players[r].HasCharacter = true;
 		players[r].IsHand = true;
 		//Debug.Log (r + " " +  players[r].HasCharacter);
-
+		Debug.Log(players[r].Character = characterList[0]);
 		for (int i = 0; i < numPlayers; i++)
         {
 			Debug.Log (i);
@@ -46,15 +47,18 @@ public class CharacterFactory : MonoBehaviour{
 
 			
 			players[i].Character = characterList[r2];
+			players[i].CharacterMesh = meshList[r2];
 			players[i].HasCharacter = true;
 			characterList[r2].IsAssigned = true;
+			//player[i].gameObject.GetComponent<Character>; 
 			//Debug.Log ("Assigned Player " + i + " to " + characterList[r2]);
 		}
 	}
 	
 
 
-	protected void SpawnCharacters(){
+	protected void SpawnCharacters()
+	{
 		foreach (Player p in players)
 		{
 			p.SetRB();
@@ -83,7 +87,8 @@ public class CharacterFactory : MonoBehaviour{
 		}
 	}
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 	
 	}
 }

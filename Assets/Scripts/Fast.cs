@@ -1,27 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (MeshFilter))]
 
 public class Fast : Character{
 
 	//additional mechanics & stats
 
-	
-	#region Variables
-	//public:
-	//private:
-	#endregion
-	
-	
-	void Start () 
+
+	private void Awake ()
 	{
 		moveSpeed *= 1.25f;
 		turnSpeed *= 1.25f;
 	}
-	
-	
-	void Update () 
-	{
-	}
-
 }
