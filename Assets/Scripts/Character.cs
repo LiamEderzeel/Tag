@@ -10,7 +10,7 @@ public class Character : MonoBehaviour {
     [SerializeField] private Mesh[] _meshList = new Mesh[4];
     private MeshFilter _meshFilter;
     [SerializeField] private bool _taged;
-    private Tagger _newTagger;
+    public Tagger _newTagger;
 
     private void Awake ()
     {

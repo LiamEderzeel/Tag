@@ -3,17 +3,19 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    private GameObject Tagger;
+    private GameObject _tagger;
+	private GameObject _player1;
     void Start ()
     {
-
-        GameObject g = Instantiate<GameObject>( Resources.Load<GameObject> ("Enemy2") );
-        Character theEnemy = g.GetComponent<Enemy2> ();
-
-        theEnemy.iDied += SomeEnemyDied;
+		_player1 = gameObject.Find("Fast");
+		_player1.GetComponent<Character>()._newTagger += SomeEnemyDied;
     }
 
     void Update ()
     {
+    }
+	void SomeEnemyDied( Character theTagger )
+	{
+		Debug.Log ("IT'S A TAGGER!");
     }
 }
