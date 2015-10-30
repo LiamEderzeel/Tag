@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 	}
 	[SerializeField] private bool _taged;
 	[SerializeField] private bool _controlle = true;
+	private float r_rot;
 	private Vector2 m_Input;
 	private Vector3 m_MoveDir = Vector3.zero;
 	private CollisionFlags m_CollisionFlags;
@@ -41,12 +42,15 @@ public class Player : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		float speed = 20f;
+		float rSpeed = 60f;
 		if(_controlle)
 		{
 			GetInput();
 			Vector3 desiredMove = transform.forward*m_Input.x + transform.right*m_Input.y;
 
 			_transform.Translate(desiredMove * Time.deltaTime * speed);
+
+			_transform.Rotate(transform.up, r_rot * Time.deltaTime * rSpeed);
 		}
 	}
 
@@ -68,6 +72,14 @@ public class Player : MonoBehaviour {
 		{
 			m_Input.Normalize();
 		}
+
+		float rightH = Input.GetAxis("RightH");
+		if(rightH < threhold && rightH > -threhold){
+			rightH = 0f;
+		}
+		else rightH = 1f;
+		r_rot = rightH;
+
 	}
 
 	void OnCollisionEnter(Collision collision)
