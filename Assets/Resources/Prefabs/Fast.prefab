@@ -1,48 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &121858
+--- !u!1 &146834
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 433618}
-  - 33: {fileID: 3306532}
-  - 23: {fileID: 2350798}
-  - 54: {fileID: 5470156}
-  - 114: {fileID: 11409462}
-  - 136: {fileID: 13688662}
+  - 4: {fileID: 409906}
+  - 33: {fileID: 3311722}
+  - 23: {fileID: 2305594}
+  - 54: {fileID: 5410812}
+  - 136: {fileID: 13627988}
+  - 114: {fileID: 11404518}
+  - 114: {fileID: 11419348}
   m_Layer: 0
-  m_Name: Hand
-  m_TagString: HandCharacter
+  m_Name: Fast
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &433618
+--- !u!4 &409906
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121858}
+  m_GameObject: {fileID: 146834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1573813, y: 1.19000006, z: -2.52532196}
-  m_LocalScale: {x: .424912572, y: .424912572, z: .424912572}
+  m_LocalPosition: {x: 3.06999993, y: 1.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2350798
+--- !u!23 &2305594
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121858}
+  m_GameObject: {fileID: 146834}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 56d103a1de78b90478078cbc50876cb6, type: 2}
+  - {fileID: 2100000, guid: 657d335bb09e54bc5b69eaf8e0653ef0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -56,19 +57,19 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3306532
+--- !u!33 &3311722
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121858}
-  m_Mesh: {fileID: 4300000, guid: 7ff189ed72df9f34e9bc8f6b486feac8, type: 3}
---- !u!54 &5470156
+  m_GameObject: {fileID: 146834}
+  m_Mesh: {fileID: 4300000, guid: f23f8d5e9baa241bbbfa6358eccd3e47, type: 3}
+--- !u!54 &5410812
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121858}
+  m_GameObject: {fileID: 146834}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -76,34 +77,52 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &11409462
+--- !u!114 &11404518
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121858}
+  m_GameObject: {fileID: 146834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc800edaaa8ba2b4bb6986cb36b19bec, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c869d87a38f42a4da252adb32bdd64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  turnSpeed: 1
-  rB: {fileID: 0}
-  isAssigned: 1
---- !u!136 &13688662
+  controller: 0
+  _taged: 0
+  _controlle: 1
+  _materials: []
+--- !u!114 &11419348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b314655daf57aeb4595000e7ab8be971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterType: 1
+  _meshList:
+  - {fileID: 4300002, guid: 7ff189ed72df9f34e9bc8f6b486feac8, type: 3}
+  - {fileID: 4300004, guid: 7233a4738d35bf247bd2dda04844e4ad, type: 3}
+  - {fileID: 4300000, guid: f23f8d5e9baa241bbbfa6358eccd3e47, type: 3}
+  - {fileID: 4300002, guid: da02b06baac6c8a4c8b7c11e2691762f, type: 3}
+  _taged: 1
+--- !u!136 &13627988
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121858}
+  m_GameObject: {fileID: 146834}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .720000029
-  m_Height: 3.43000007
+  m_Radius: .386168301
+  m_Height: 1.48505104
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
@@ -112,20 +131,8 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_TagString
-      value: HandCharacter
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: isAssigned
-      value: 0
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 121858}
+  m_RootGameObject: {fileID: 146834}
   m_IsPrefabParent: 1

@@ -15,8 +15,8 @@ public class Hand : Character {
 	
 	void Start () 
 	{
-		moveSpeed *= 1.5f;
-		turnSpeed *= 1.5f;
+		//moveSpeed *= 1.5f;
+		//turnSpeed *= 1.5f;
 	}
 	
 	

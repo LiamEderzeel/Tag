@@ -3,74 +3,104 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	//public GameObject modelBig, modelFast, modelSmall, modelHand;
-
-	public Character _Character;
-	public Mesh _CharacterMesh;
-	public Material _CharacterMaterial;
-	public Renderer _renderer;
-	public int _Controller;
-	private bool hasCharacter;
-	private bool isHand;
-	private Rigidbody rB;
-	public MeshFilter _meshFilter;
-	private MeshCollider _meshCollider;
-	void Awake()
+	[SerializeField] private int controller = 0;
+	public bool Taged
 	{
-		hasCharacter = false;
-		isHand = false;
-		_Controller = 0;
-		this.gameObject.AddComponent<MeshRenderer>();
-		this.gameObject.AddComponent<MeshFilter>();
-		this.gameObject.AddComponent<MeshCollider>();
-		this.gameObject.AddComponent<Renderer>();
-		_renderer = this.gameObject.GetComponent<Renderer>();
-		_meshFilter = this.gameObject.GetComponent<MeshFilter>();
-		_meshCollider = this.gameObject.GetComponent<MeshCollider>();
+		set { _taged = value; }
+	}
+	[SerializeField] private bool _taged;
+	[SerializeField] private bool _controlle = true;
+	private Vector2 m_Input;
+	private Vector3 m_MoveDir = Vector3.zero;
+	private CollisionFlags m_CollisionFlags;
+	private Transform _transform;
+	private Renderer _renderer;
+	private string[] _horizontal  = {"Horizontal1", "Horizontal2", "Horizontal3", "Horizontal4"};
+	private string[] _vertical  = {"Vertical1", "Vertical2", "Vertical3", "Vertical4"};
+	[SerializeField] private Material[] _materials;
 
+	void Awake ()
+	{
 
 	}
-	// Use this for initialization
-	void Start () {
-		//Character character;
-		//character = Instantiate(this._Character,Vector3.zero,Quaternion.identity) as Character;
-		//this.gameObject.AddComponent(_Character.GetType());
-		_renderer.material = _CharacterMaterial;
-		_meshFilter.mesh = _CharacterMesh;
-		_meshCollider.sharedMesh = _CharacterMesh;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void Start ()
+	{
+		_transform = GetComponent<Transform>();
+		_renderer = GetComponent<Renderer>();
+
+		if(_taged)
+		{
+			Tag();
+		}
 	}
 
-	public Character Character
+	void Update ()
 	{
-		get { return _Character;}
-		set { _Character = value;}
 	}
 
-	public Mesh CharacterMesh
+	void FixedUpdate ()
 	{
-		set { _CharacterMesh = value;}
-    }
+		float speed = 20f;
+		if(_controlle)
+		{
+			GetInput();
+			Vector3 desiredMove = transform.forward*m_Input.x + transform.right*m_Input.y;
 
-	public bool HasCharacter
-	{
-		get {return hasCharacter;}
-		set {hasCharacter = value;}
+			_transform.Translate(desiredMove * Time.deltaTime * speed);
+		}
 	}
 
-	public bool IsHand
+	void GetInput ()
 	{
-		get{return isHand;}
-		set{isHand = value;}
+		float horizontal = Input.GetAxis(_horizontal[controller]);
+		float vertical = Input.GetAxis(_vertical[controller]);
+		float threhold =0.2f;
+		if(horizontal < threhold && horizontal > -threhold){
+			horizontal = 0f;
+		}
+		if(vertical < threhold && vertical > -threhold){
+			vertical = 0f;
+		}
+
+		m_Input = new Vector2(-horizontal, vertical);
+
+		if (m_Input.sqrMagnitude > 1)
+		{
+			m_Input.Normalize();
+		}
 	}
 
-	public void SetRB()
+	void OnCollisionEnter(Collision collision)
 	{
-		this.rB = _Character.GetComponent<Rigidbody>();
+		if(collision.gameObject.tag == "Player"){
+			if(_taged)
+			{
+				UnTag();
+				//collision.gameObject.GetComponent<PlayerMovement>().Tag();
+				Debug.Log("Tag your it!" + collision.gameObject.name);
+			}
+		}
+	}
+
+	public void Tag()
+	{
+		StartCoroutine(TagRoutine());
+	}
+
+	IEnumerator TagRoutine()
+	{
+		//_renderer.material = _materials[1];
+		//_controlle = false;
+		yield return new WaitForSeconds(2f);
+		//_taged = true;
+		//_controlle = true;
+	}
+
+	private void UnTag()
+	{
+		_renderer.material = _materials[0];
+		_taged = false;
 	}
 
 }
+

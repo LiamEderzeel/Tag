@@ -15,8 +15,8 @@ public class Big : Character {
 
 	void Start () 
 	{
-		moveSpeed *= 0.75f;
-		turnSpeed *= 0.75f;
+		//moveSpeed *= 0.75f;
+		//turnSpeed *= 0.75f;
 	}
 
 

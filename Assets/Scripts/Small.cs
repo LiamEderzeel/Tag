@@ -15,8 +15,8 @@ public class Small : Character {
 	
 	void Start () 
 	{
-		moveSpeed *= 1.0f;
-		turnSpeed *= 1.0f;
+		//moveSpeed *= 1.0f;
+		//turnSpeed *= 1.0f;
 	}
 	
 	

@@ -3,34 +3,17 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	public enum GameState {Menu, Game}
-	private static GameState _gameState;
-	public string _selectedLevel = "level_1";
-
-	private void Awake()
+    private GameObject Tagger;
+    void Start ()
     {
-        DontDestroyOnLoad(transform.gameObject);
-	}
 
-	private void Update()
+        GameObject g = Instantiate<GameObject>( Resources.Load<GameObject> ("Enemy2") );
+        Character theEnemy = g.GetComponent<Enemy2> ();
+
+        theEnemy.iDied += SomeEnemyDied;
+    }
+
+    void Update ()
     {
-		//_menuTicket.SetActive(true);
-	}
-
-	private void _changeState(GameState newGameState)
-	{
-		//_menuTicket.SetActive(false);
-        if(newGameState == GameState.Menu)
-        {
-        }
-        else if(newGameState == GameState.Game)
-        {
-            Application.LoadLevel(_selectedLevel);
-        }
-	}
-
-    public void ToGame()
-    {
-        _changeState(GameState.Game);
     }
 }

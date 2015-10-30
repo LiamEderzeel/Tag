@@ -10,7 +10,7 @@ public class Fast : Character{
 
 	private void Awake ()
 	{
-		moveSpeed *= 1.25f;
-		turnSpeed *= 1.25f;
+		//moveSpeed *= 1.25f;
+		//turnSpeed *= 1.25f;
 	}
 }
