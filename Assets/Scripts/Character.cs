@@ -3,16 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 
 public enum CharacterType {Hand=0, Fat=1, Fast=2, Small=3};
-public delegate void Tagger( Character theTagger );
+
 
 public class Character : MonoBehaviour
 {
     [SerializeField] private CharacterType _characterType;
-    [SerializeField] private Mesh[] _meshList = new Mesh[4];
+    [SerializeField] private Mesh[] _meshs = new Mesh[4];
+	[SerializeField] private Material[] _materials = new Material[4];
     private MeshFilter _meshFilter;
-    [SerializeField] private bool _taged;
-    public Tagger _newTagger;
+    private bool _taged;
+
+	public bool Taged
+	{
+		set { _taged = value; }
+	}
+
 	public float _angle;
+
 
     private void Awake ()
     {
@@ -21,20 +28,23 @@ public class Character : MonoBehaviour
             _characterType = CharacterType.Hand;
         }
         _meshFilter = this.gameObject.GetComponent<MeshFilter>();
-        _meshFilter.mesh = _meshList[(int)_characterType];
+		_meshFilter.mesh = _meshs[(int)_characterType];
     }
-	private void Start()
-	{
-		if(!_taged)
-		{
-			_newTagger(this);
-		}
-	}
-
+	
 	private void Update()
 	{
 		this.gameObject.transform.eulerAngles = new Vector3(0, _angle, 0);
 	}
 
-
+	private void OnCollisionEnter (Collision collision) 
+	{
+		if(collision.gameObject.GetComponent<Character>() != null)
+		{
+			Player Player = collision.gameObject.transform.parent.GetComponent<Player>();
+			if(_taged)
+			{
+			Debug.Log("Tag your it!" + Player.gameObject.name);
+			}
+		}
+	}
 }
