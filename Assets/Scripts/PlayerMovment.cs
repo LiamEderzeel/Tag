@@ -12,25 +12,30 @@ public class PlayerMovment : MonoBehaviour {
 	private string[] _vertical  = {"Vertical1", "Vertical2", "Vertical3", "Vertical4"};
 	private float _angle;
 	private GameObject _character;
+    private float _movementSpeed = 20f;
+
+    public float MovementSpeed
+    {
+        set { _movementSpeed = value; }
+    }
 
     private void Awake ()
     {
 		_character = this.gameObject.transform.GetChild(0).gameObject;
     }
-	void FixedUpdate ()
+
+	private void FixedUpdate ()
 	{
-		float speed = 20f;
-		float rSpeed = 60f;
 		if(_controlle)
 		{
 			GetInput();
 			Vector3 desiredMove = new Vector3(m_Input.x, 0, m_Input.y);
 			this.gameObject.transform.eulerAngles = new Vector3(0, GlobalVars.MainCamera.transform.eulerAngles.y -90, 0);
-			this.gameObject.transform.Translate(desiredMove * Time.deltaTime * speed);
+			this.gameObject.transform.Translate(desiredMove * Time.deltaTime * _movementSpeed);
 		}
 	}
 
-	void GetInput ()
+	private void GetInput ()
 	{
 		float horizontal = Input.GetAxis(_horizontal[controller]);
 		float vertical = Input.GetAxis(_vertical[controller]);
@@ -39,6 +44,7 @@ public class PlayerMovment : MonoBehaviour {
 		if(horizontal < threhold && horizontal > -threhold){
 			horizontal = 0f;
 		}
+
 		if(vertical < threhold && vertical > -threhold){
 			vertical = 0f;
 		}
@@ -46,6 +52,7 @@ public class PlayerMovment : MonoBehaviour {
 		m_Input = new Vector2(-horizontal, -vertical);
 		_angle = Mathf.Atan2(-horizontal, -vertical) * Mathf.Rad2Deg + GlobalVars.MainCamera.transform.eulerAngles.y - 180;
 		_character.GetComponent<Character>()._angle = _angle;
+
 		if (m_Input.sqrMagnitude > 1)
 		{
 			m_Input.Normalize();

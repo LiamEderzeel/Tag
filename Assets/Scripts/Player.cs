@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public delegate void Tagger(Player theTagger);
 
 public class Player : MonoBehaviour
 {
-	public event Tagger _newTagger;
-	public bool Taged
-	{
-		set { _taged = value; }
-	}
 	[SerializeField] private bool _taged;
+	public event Tagger _newTagger;
 	private CollisionFlags m_CollisionFlags;
 	private Transform _transform;
 	private Renderer _renderer;
     private GameObject _character;
 
-	void Awake ()
+	public bool Taged
+	{
+		set { _taged = value; }
+	}
+
+	 private void Awake ()
 	{
 		_character = this.gameObject.transform.GetChild(0).gameObject;
 		if(_taged)
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	void Start ()
+	private void Start ()
 	{
 		_transform = GetComponent<Transform>();
 		_renderer = GetComponent<Renderer>();
