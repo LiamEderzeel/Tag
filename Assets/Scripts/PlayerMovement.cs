@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovment : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
 
-	[SerializeField] private bool _controlle = true;
-	[SerializeField] private int controller = 0;
+	[SerializeField] private bool _control = true;
+	[SerializeField] private int _controller = 0;
 	private float r_rot;
 	private Vector2 m_Input;
 	private Vector3 m_MoveDir = Vector3.zero;
@@ -13,6 +13,11 @@ public class PlayerMovment : MonoBehaviour {
 	private float _angle;
 	private GameObject _character;
     private float _movementSpeed = 20f;
+
+    public int Controller
+    {
+        set { _controller = value; }
+    }
 
     public float MovementSpeed
     {
@@ -26,7 +31,7 @@ public class PlayerMovment : MonoBehaviour {
 
 	private void FixedUpdate ()
 	{
-		if(_controlle)
+		if(_control)
 		{
 			GetInput();
 			Vector3 desiredMove = new Vector3(m_Input.x, 0, m_Input.y);
@@ -37,8 +42,8 @@ public class PlayerMovment : MonoBehaviour {
 
 	private void GetInput ()
 	{
-		float horizontal = Input.GetAxis(_horizontal[controller]);
-		float vertical = Input.GetAxis(_vertical[controller]);
+		float horizontal = Input.GetAxis(_horizontal[_controller]);
+		float vertical = Input.GetAxis(_vertical[_controller]);
 		float threhold =0.2f;
 
 		if(horizontal < threhold && horizontal > -threhold){

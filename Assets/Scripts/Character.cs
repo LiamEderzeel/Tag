@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum CharacterType {Hand=0, Fat=1, Fast=2, Small=3};
-
 public class Character : MonoBehaviour
 {
     [SerializeField] private CharacterType _characterType;
@@ -13,6 +11,11 @@ public class Character : MonoBehaviour
     private MeshFilter _meshFilter;
     private Renderer _renderer;
 	public float _angle;
+
+    public CharacterType CharacterType
+    {
+        set { _characterType = value; }
+    }
 
 	public bool Taged
 	{
@@ -54,7 +57,6 @@ public class Character : MonoBehaviour
 
 			if(_taged)
 			{
-				Debug.Log(gameObject.transform.parent.name);
 				gameObject.transform.parent.GetComponent<Player>().CharacterCollison(collision.gameObject.GetComponent<Character>());
 			}
 		}
