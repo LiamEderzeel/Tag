@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
 	public void Tag ()
 	{
 		_taged = true;
-		_character.GetComponent<Character>().Taged = true;
+        _character.GetComponent<Character>().Tag();
 		Debug.Log(gameObject.name +  " set tagger " + _taged);
 	}
 

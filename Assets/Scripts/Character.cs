@@ -9,30 +9,43 @@ public class Character : MonoBehaviour
     [SerializeField] private CharacterType _characterType;
     [SerializeField] private Mesh[] _meshs = new Mesh[4];
 	[SerializeField] private Material[] _materials = new Material[4];
-    private MeshFilter _meshFilter;
 	[SerializeField] private bool _taged;
+    private MeshFilter _meshFilter;
+    private Renderer _renderer;
+	public float _angle;
 
 	public bool Taged
 	{
 		set { _taged = value; }
 	}
 
-	public float _angle;
-
     private void Awake ()
+    {
+        _meshFilter = this.gameObject.GetComponent<MeshFilter>();
+        _renderer = this.gameObject.GetComponent<Renderer>();
+    }
+
+    private void Start ()
     {
         if(_taged)
         {
             _characterType = CharacterType.Hand;
         }
-        _meshFilter = this.gameObject.GetComponent<MeshFilter>();
 		_meshFilter.mesh = _meshs[(int)_characterType];
+		_renderer.material = _materials[(int)_characterType];
     }
 
 	private void Update()
 	{
 		this.gameObject.transform.eulerAngles = new Vector3(0, _angle, 0);
 	}
+
+    public void Tag()
+    {
+        Taged = true;
+		_meshFilter.mesh = _meshs[(int)_characterType];
+		_renderer.material = _materials[(int)_characterType];
+    }
 
 	private void OnCollisionEnter (Collision collision)
 	{
