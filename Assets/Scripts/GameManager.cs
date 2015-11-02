@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    private GameObject _tagger;
+	[SerializeField] private GameObject _tagger;
 	public GameObject _player1;
 	public GameObject _player2;
 
@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour {
 
 	void newTagger( Player theTagger )
 	{
-		Debug.Log ("IT'S A TAGGER!");
+		Debug.Log ("IT'S A TAGGER! " + theTagger.gameObject.name);
+		_tagger = theTagger.gameObject;
+		theTagger.Tag();
     }
 }

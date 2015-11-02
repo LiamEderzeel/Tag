@@ -1668,7 +1668,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 407124, guid: e8516dc3ca65d43ab91a17b96ebb1c72, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 27.4462051
+      value: 32.0800018
       objectReference: {fileID: 0}
     - target: {fileID: 407124, guid: e8516dc3ca65d43ab91a17b96ebb1c72, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1705,6 +1705,14 @@ Prefab:
     - target: {fileID: 182280, guid: e8516dc3ca65d43ab91a17b96ebb1c72, type: 2}
       propertyPath: m_Name
       value: Character2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11499778, guid: e8516dc3ca65d43ab91a17b96ebb1c72, type: 2}
+      propertyPath: controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11499778, guid: e8516dc3ca65d43ab91a17b96ebb1c72, type: 2}
+      propertyPath: _taged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8516dc3ca65d43ab91a17b96ebb1c72, type: 2}
@@ -4397,6 +4405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb226c90d17447f29dd3c07a6c58310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tagger: {fileID: 0}
   _player1: {fileID: 0}
   _player2: {fileID: 0}
 --- !u!1001 &1709719060
