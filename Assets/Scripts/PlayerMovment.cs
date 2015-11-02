@@ -19,7 +19,7 @@ public class PlayerMovment : MonoBehaviour {
         set { _movementSpeed = value; }
     }
 
-    private void Awake ()
+    private void Start ()
     {
 		_character = this.gameObject.transform.GetChild(0).gameObject;
     }

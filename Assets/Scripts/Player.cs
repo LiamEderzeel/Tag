@@ -19,7 +19,10 @@ public class Player : MonoBehaviour
 
 	 private void Awake ()
 	{
-		_character = this.gameObject.transform.GetChild(0).gameObject;
+        GameObject character = Resources.Load("Prefabs/Character") as GameObject;
+        _character = GameObject.Instantiate(character);
+        _character.transform.parent = gameObject.transform;
+		//_character = this.gameObject.transform.GetChild(0).gameObject;
 		if(_taged)
 		{
 			_character.GetComponent<Character>().Taged = true;
