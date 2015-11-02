@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d49c5ef9bf65c46ce8907882d4f4c9c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controlle: 1
-  controller: 0
+  _control: 1
+  _controller: 0
 --- !u!114 &11443274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,14 +53,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c869d87a38f42a4da252adb32bdd64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _taged: 1
+  _taged: 0
+  _characterType: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: _taged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 144296}

@@ -34,6 +34,7 @@ public class Character : MonoBehaviour
         {
             _characterType = CharacterType.Hand;
         }
+        Debug.Log("Assing " + _characterType);
 		_meshFilter.mesh = _meshs[(int)_characterType];
 		_renderer.material = _materials[(int)_characterType];
     }

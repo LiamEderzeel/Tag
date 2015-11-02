@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
                     if(selectedType == CharacterType.Hand && hand == false)
                     {
                         Debug.Log("Hand");
+                        player.gameObject.GetComponent<Player>().Taged = true;
                         hand = true;
                         roleSelected = true;
                     }
