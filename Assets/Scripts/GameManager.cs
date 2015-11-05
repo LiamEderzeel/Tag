@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-	[SerializeField] private GameObject _tagger;
+	[SerializeField] private Player _tagger;
 	[SerializeField] private GameObject[] _spawns = new GameObject[4];
 	public GameObject _player;
     private int _playerAmount = 4;
@@ -12,64 +12,9 @@ public class GameManager : MonoBehaviour {
 
 	private void Awake ()
 	{
-        bool hand = false;
-        bool big = false;
-        bool fast = false;
-        bool small = false;
 		GlobalVars.GetSingleton ();
         _player = Resources.Load("Prefabs/Player") as GameObject;
-        for(int i = 0; i < _playerAmount; ++i)
-        {
-            GameObject player = Instantiate(_player, _spawns[i].transform.position, Quaternion.identity) as GameObject;
-            player.gameObject.GetComponent<PlayerMovement>().Controller = i;
-            _players.Add(player);
-            bool uniceRol = false;
-            bool roleSelected = false;
-            CharacterType selectedType = CharacterType.Null;
-            selectedType = SelectType();
-            while(!uniceRol)
-            {
-                Debug.Log("hand " + hand + " big " + big + " fast " + fast + " small " + small);
-                if(!roleSelected)
-                {
-                    if(selectedType == CharacterType.Hand && hand == false)
-                    {
-                        Debug.Log("Hand");
-                        player.gameObject.GetComponent<Player>().Taged = true;
-                        hand = true;
-                        roleSelected = true;
-                    }
-                    else if(selectedType == CharacterType.Big && big == false)
-                    {
-                        Debug.Log("Big");
-                        big = true;
-                        roleSelected = true;
-                    }
-                    else if(selectedType == CharacterType.Fast && fast == false)
-                    {
-                        Debug.Log("Fast");
-                        fast = true;
-                        roleSelected = true;
-                    }
-                    else if(selectedType == CharacterType.Small && small == false)
-                    {
-                        Debug.Log("Small");
-                        small = true;
-                        roleSelected = true;
-                    }
-                    else
-                    {
-                        Debug.Log("again!");
-                        selectedType = SelectType();
-                    }
-                }
-                else
-                {
-                    player.gameObject.GetComponent<Player>().CharacterType = selectedType;
-                    uniceRol = true;
-                }
-            }
-        }
+        GiveRole();
 	}
 
     private CharacterType SelectType()
@@ -93,20 +38,136 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void Start ()
+    private void Start ()
     {
-		//_player1 = GameObject.Find("Player");
-		//_player2 = GameObject.Find("Player2");
         for(int i = 0; i < _players.Count; ++i)
         {
 		_players[i].GetComponent<Player>()._newTagger += newTagger;
         }
     }
 
-	void newTagger( Player theTagger )
+	private void newTagger( Player theTagger )
 	{
-		Debug.Log ("IT'S A TAGGER! " + theTagger.gameObject.name);
-		_tagger = theTagger.gameObject;
-		theTagger.Tag();
+        _tagger = theTagger;
+        GiveRole2();
+        for(int j = 0; j < _players.Count; ++j)
+        {
+            if(_players[j].name == theTagger.gameObject.name)
+            {
+                if(_tagger == _players[j].GetComponent<Player>())
+                {
+                }
+            }
+        }
+    }
+
+    private void GiveRole ()
+    {
+        bool hand = false;
+        bool big = false;
+        bool fast = false;
+        bool small = false;
+        for(int i = 0; i < _playerAmount; ++i)
+        {
+            if(_players.Count <= _playerAmount - 1)
+            {
+                GameObject player = Instantiate(_player, _spawns[i].transform.position, Quaternion.identity) as GameObject;
+                player.gameObject.GetComponent<PlayerMovement>().Controller = i;
+                player.name = "player"+i;
+                _players.Add(player);
+            }
+            bool uniceRol = false;
+            bool roleSelected = false;
+            CharacterType selectedType = CharacterType.Null;
+            selectedType = SelectType();
+            while(!uniceRol)
+            {
+                if(!roleSelected)
+                {
+                    if(_tagger == _players[i] || (_tagger == null && selectedType == CharacterType.Hand && hand == false))
+                    {
+                        _players[i].gameObject.GetComponent<Player>().Taged = true;
+                        hand = true;
+                        roleSelected = true;
+                    }
+                    else if(selectedType == CharacterType.Big && big == false)
+                    {
+                        big = true;
+                        roleSelected = true;
+                    }
+                    else if(selectedType == CharacterType.Fast && fast == false)
+                    {
+                        fast = true;
+                        roleSelected = true;
+                    }
+                    else if(selectedType == CharacterType.Small && small == false)
+                    {
+                        small = true;
+                        roleSelected = true;
+                    }
+                    else
+                    {
+                        selectedType = SelectType();
+                    }
+                }
+                else
+                {
+                    _players[i].gameObject.GetComponent<Player>().CharacterType = selectedType;
+                    uniceRol = true;
+                }
+            }
+        }
+    }
+
+    private void GiveRole2 ()
+    {
+        bool hand = false;
+        bool big = false;
+        bool fast = false;
+        bool small = false;
+        for(int i = 0; i < _players.Count; ++i)
+        {
+            _players[i].transform.position = _spawns[i].transform.position;
+            bool uniceRol = false;
+            bool roleSelected = false;
+            CharacterType selectedType = CharacterType.Null;
+            selectedType = SelectType();
+            while(!uniceRol)
+            {
+                if(!roleSelected)
+                {
+                    if(_tagger == _players[i] || (selectedType == CharacterType.Hand && hand == false))
+                    {
+                        _players[i].gameObject.GetComponent<Player>().Tag();
+                        hand = true;
+                        roleSelected = true;
+                    }
+                    else if(selectedType == CharacterType.Big && big == false)
+                    {
+                        big = true;
+                        roleSelected = true;
+                    }
+                    else if(selectedType == CharacterType.Fast && fast == false)
+                    {
+                        fast = true;
+                        roleSelected = true;
+                    }
+                    else if(selectedType == CharacterType.Small && small == false)
+                    {
+                        small = true;
+                        roleSelected = true;
+                    }
+                    else
+                    {
+                        selectedType = SelectType();
+                    }
+                }
+                else
+                {
+                    _players[i].gameObject.GetComponent<Player>().CharacterType = selectedType;
+                    uniceRol = true;
+                }
+            }
+        }
     }
 }

@@ -40,17 +40,8 @@ public class Player : MonoBehaviour
     private void Start ()
     {
         _character.GetComponent<Character>().CharacterType = _characterType;
-        Debug.Log("test " + _characterType);
         _transform = GetComponent<Transform>();
         _renderer = GetComponent<Renderer>();
-
-        if (_taged)
-        {
-            if(_newTagger != null)
-            {
-                _newTagger (this);
-            }
-        }
     }
 
     public void CharacterCollison(Character theCharacter)
