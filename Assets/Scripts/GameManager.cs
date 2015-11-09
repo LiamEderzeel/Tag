@@ -136,11 +136,11 @@ public class GameManager : MonoBehaviour {
             {
                 if(!roleSelected)
                 {
-                    if(_tagger == _players[i] || (selectedType == CharacterType.Hand && hand == false))
+                    if(selectedType == CharacterType.Hand && hand == false)
                     {
-                        _players[i].gameObject.GetComponent<Player>().Tag();
                         hand = true;
                         roleSelected = true;
+						_players[i].gameObject.GetComponent<Player>().Taged = true;
                     }
                     else if(selectedType == CharacterType.Big && big == false)
                     {
@@ -165,6 +165,7 @@ public class GameManager : MonoBehaviour {
                 else
                 {
                     _players[i].gameObject.GetComponent<Player>().CharacterType = selectedType;
+					_players[i].gameObject.GetComponent<Player>().NewModel();
                     uniceRol = true;
                 }
             }

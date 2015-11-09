@@ -31,10 +31,6 @@ public class Player : MonoBehaviour
         _character = Instantiate(character, gameObject.transform.position, Quaternion.identity) as GameObject;
         _character.transform.parent = gameObject.transform;
         //_character = this.gameObject.transform.GetChild(0).gameObject;
-        if(_taged)
-        {
-            _character.GetComponent<Character>().Taged = true;
-        }
     }
 
     private void Start ()
@@ -53,21 +49,13 @@ public class Player : MonoBehaviour
                 _newTagger (theCharacter.gameObject.transform.parent.GetComponent<Player>());
                 //theCharacter.gameObject.transform.parent.GetComponent<Player>().Tag();
                 Debug.Log (theCharacter.gameObject.name);
-                UnTag();
             }
         }
     }
-
-    public void Tag ()
-    {
-        _taged = true;
-        _character.GetComponent<Character>().Tag();
-    }
-
-    public void UnTag ()
-    {
-        _taged = false;
-        _character.GetComponent<Character>().Taged = false;
-    }
+	
+	public void NewModel ()
+	{
+		_character.GetComponent<Character>().LoadModel(_characterType);
+	}
 }
 
