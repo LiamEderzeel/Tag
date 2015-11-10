@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class Hand : Character {
+public class Hand : MonoBehaviour{
 
 	//additional mechanics & stats
 

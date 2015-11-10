@@ -62,6 +62,12 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			m_Input.Normalize();
 		}
+
+
+		if(Input.GetKeyDown(KeyCode.JoystickButton1))
+		{
+			this.GetComponent<Abilities>().Offensive();
+		}
 	}
 
 }

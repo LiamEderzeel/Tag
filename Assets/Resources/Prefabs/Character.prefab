@@ -100,7 +100,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9c569cd05e8106548b2708b6abf90998, type: 2}
   - {fileID: 2100000, guid: 7da17ff893305c441b8528b83feeb87d, type: 2}
   - {fileID: 2100000, guid: 03bd8f9e66e508b449ea12ac2d6f3996, type: 2}
-  _taged: 0
   _angle: 0
 --- !u!136 &13666380
 CapsuleCollider:

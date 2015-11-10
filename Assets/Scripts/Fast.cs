@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (MeshFilter))]
 
-public class Fast : Character{
+public class Fast : MonoBehaviour{
 
 	//additional mechanics & stats
 

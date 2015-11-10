@@ -4366,6 +4366,7 @@ MonoBehaviour:
   - {fileID: 864772048}
   - {fileID: 1786972747}
   _player: {fileID: 0}
+  _players: []
 --- !u!1001 &1709719060
 Prefab:
   m_ObjectHideFlags: 0

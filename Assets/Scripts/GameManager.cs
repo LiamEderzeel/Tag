@@ -8,13 +8,17 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] private GameObject[] _spawns = new GameObject[4];
 	public GameObject _player;
     private int _playerAmount = 4;
-    private List<GameObject> _players = new List<GameObject>();
+    public List<GameObject> _players = new List<GameObject>();
 
 	private void Awake ()
 	{
 		GlobalVars.GetSingleton ();
         _player = Resources.Load("Prefabs/Player") as GameObject;
         GiveRole();
+		foreach (GameObject p in _players)
+		{
+			p.GetComponent<Abilities>().FillPlayerList(_players);
+		}
 	}
 
     private CharacterType SelectType()
@@ -60,6 +64,8 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
+	
+
 
     private void GiveRole ()
     {
@@ -74,6 +80,7 @@ public class GameManager : MonoBehaviour {
                 GameObject player = Instantiate(_player, _spawns[i].transform.position, Quaternion.identity) as GameObject;
                 player.gameObject.GetComponent<PlayerMovement>().Controller = i;
                 player.name = "player"+i;
+				//player.AddComponent<Abilities>();
                 _players.Add(player);
             }
             bool uniceRol = false;
@@ -113,6 +120,7 @@ public class GameManager : MonoBehaviour {
                 else
                 {
                     _players[i].gameObject.GetComponent<Player>().CharacterType = selectedType;
+					_players[i].gameObject.GetComponent<Abilities>().CharacterType = selectedType;
                     uniceRol = true;
                 }
             }
@@ -165,10 +173,16 @@ public class GameManager : MonoBehaviour {
                 else
                 {
                     _players[i].gameObject.GetComponent<Player>().CharacterType = selectedType;
+					_players[i].gameObject.GetComponent<Abilities>().CharacterType = selectedType;
 					_players[i].gameObject.GetComponent<Player>().NewModel();
                     uniceRol = true;
                 }
             }
         }
     }
+
+	public List<GameObject> Players
+	{
+		get{return _players;}
+	}
 }
