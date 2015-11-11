@@ -1,61 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public delegate void Tagger(Player theTagger);
-public enum CharacterType {Null=-1, Hand=0, Big=1, Fast=2, Small=3};
-
-public class Player : MonoBehaviour
-{
-    [SerializeField] private bool _taged;
-    [SerializeField] private CharacterType _characterType;
-    public event Tagger _newTagger;
-    private CollisionFlags m_CollisionFlags;
-    private Transform _transform;
-    private Renderer _renderer;
-    private GameObject _character;
-
-    public CharacterType CharacterType
-    {
-        get { return _characterType; }
-        set { _characterType = value; }
-    }
-
-    public bool Taged
-    {
-        set { _taged = value; }
-    }
-
-    private void Awake ()
-    {
-        GameObject character = Resources.Load("Prefabs/Character") as GameObject;
-        _character = Instantiate(character, gameObject.transform.position, Quaternion.identity) as GameObject;
-        _character.transform.parent = gameObject.transform;
-        //_character = this.gameObject.transform.GetChild(0).gameObject;
-    }
-
-    private void Start ()
-    {
-        _character.GetComponent<Character>().CharacterType = _characterType;
-        _transform = GetComponent<Transform>();
-        _renderer = GetComponent<Renderer>();
-    }
-
-    public void CharacterCollison(Character theCharacter)
-    {
-        if (_taged)
-        {
-            if(_newTagger != null)
-            {
-                _newTagger (theCharacter.gameObject.transform.parent.GetComponent<Player>());
-                //theCharacter.gameObject.transform.parent.GetComponent<Player>().Tag();
-                Debug.Log (theCharacter.gameObject.name);
-            }
-        }
-    }
-	
-	public void NewModel ()
-	{
-		_character.GetComponent<Character>().LoadModel(_characterType);
+public class Player : MonoBehaviour {
+	[SerializeField] protected int _controller = 0;
+	[SerializeField] private float _angle;
+	[SerializeField] protected bool _tagged;
+	public List<Player> players;
+	[SerializeField] private Vector3 _startPos;
+	// Use this for initialization
+	public virtual void Start () {
+		_tagged = false;
+		_startPos = this.transform.position;
 	}
-}
+	
+	// Update is called once per frame
+	public virtual void Update () {
+		this.gameObject.transform.eulerAngles = new Vector3(0,_angle,0);
+	}
 
+	public int Controller
+	{
+		get{return _controller;}
+		set{_controller = value;}
+	}
+
+	public float Angle
+	{
+		get{return _angle;}
+		set{_angle = value;}
+	}
+    
+
+	public virtual void Ability1 ()
+	{
+		return;
+	}
+
+	public virtual void Reset()
+	{
+		this.transform.position = _startPos;
+	}
+
+}
