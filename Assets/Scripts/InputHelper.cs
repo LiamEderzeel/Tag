@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InputHelper : MonoBehaviour {
 	
-	[SerializeField] private bool _control = true;
+	[SerializeField] private bool _control, _aPressed;
 	[SerializeField] private int _controller = 0;
 	private float r_rot, _angle;
 	private Vector2 m_Input;
@@ -11,6 +11,7 @@ public class InputHelper : MonoBehaviour {
 	private string[] _horizontal  = {"Horizontal1", "Horizontal2", "Horizontal3", "Horizontal4"};
 	private string[] _vertical  = {"Vertical1", "Vertical2", "Vertical3", "Vertical4"};
 	private string[] _fire = {"Fire1", "Fire2", "Fire3", "Fire4"};
+	//private string[] _fire = {"joystick 1", "joystick 2", "joystick 3", "joystick 4"};
 	private GameObject _player;
 	private float _movementSpeed = 3f;
 	
@@ -26,6 +27,8 @@ public class InputHelper : MonoBehaviour {
 	
 	private void Start ()
 	{
+		_aPressed = false;
+		_control = true;
 		_player = this.gameObject;
 	}
 	
@@ -42,9 +45,12 @@ public class InputHelper : MonoBehaviour {
 	
 	private void GetInput ()
 	{
+		float aButton = 0f;
 		float horizontal = Input.GetAxis(_horizontal[_controller]);
 		float vertical = Input.GetAxis(_vertical[_controller]);
-		float aButton = Input.GetAxis (_fire[_controller]);
+		//if(!_aPressed)
+		//	aButton = Input.GetAxis (_fire[_controller]);
+		_aPressed = Input.GetButtonDown(_fire[_controller]);
 		//Debug.Log (aButton);
 		float threhold =0.2f;
 		
@@ -55,6 +61,7 @@ public class InputHelper : MonoBehaviour {
 		if(vertical < threhold && vertical > -threhold){
 			vertical = 0f;
 		}
+
 		
 		m_Input = new Vector2(-horizontal, -vertical);
 		_angle = Mathf.Atan2(-horizontal, -vertical) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y - 180;
@@ -65,10 +72,17 @@ public class InputHelper : MonoBehaviour {
             m_Input.Normalize();
         }
         
-        if( aButton == 1)
+        if(_aPressed)
+		{
             _player.GetComponent<Player>().Ability1();
+			StartCoroutine(Wait (10));
+		}
         
     }
 
-
+	IEnumerator Wait(int millis)
+	{
+		yield return new WaitForSeconds(millis/1000);
+		_aPressed = !_aPressed;
+	}
 }
