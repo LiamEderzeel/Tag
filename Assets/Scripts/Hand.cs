@@ -31,11 +31,17 @@ public class Hand : Player {
 		}
 		if(closest != null)
 		{
+			Vector3 tempPos = this.transform.position;
 			int c1 = this.Controller;
+
 			this._controller = closest.Controller;
 			this.gameObject.GetComponent<InputHelper>().Controller = closest.Controller;
+
 			closest.Controller = c1;
 			closest.gameObject.GetComponent<InputHelper>().Controller = c1;
+
+			this.transform.position = closest.transform.position;
+			closest.transform.position = tempPos;
 
 		}
 	}
