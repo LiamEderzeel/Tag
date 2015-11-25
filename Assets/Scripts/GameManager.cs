@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 	[SerializeField] private List<int> _controllers;
 	public List<float> _scores;
 	public List<Player> _players;
+	[SerializeField] private Slider[] _sliders = new Slider[4];
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +39,11 @@ public class GameManager : MonoBehaviour {
 			foreach(Player p in _players)
 				p.Reset();
 			AssignController();
+		}
+
+		for(int i = 0; i < _scores.Count; ++i)
+		{
+			_sliders[i].value = _scores[i]; 
 		}
 	}
 }
