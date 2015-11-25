@@ -141,7 +141,7 @@ Material:
       data:
         first:
           name: _RimPow
-        second: 1
+        second: .100000001
     m_Colors:
       data:
         first:
@@ -150,7 +150,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .281065732, g: .514705896, b: .1703071, a: 1}
+        second: {r: .282352954, g: .513725519, b: .168627456, a: 1}
       data:
         first:
           name: _SpecColor
@@ -158,4 +158,4 @@ Material:
       data:
         first:
           name: _RimCol
-        second: {r: .329545498, g: 1, b: 0, a: 1}
+        second: {r: .329545498, g: 1, b: 0, a: 0}

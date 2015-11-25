@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Gamemanager : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 	[SerializeField] private List<int> _controllers;
+	public List<float> _scores;
 	public List<Player> _players;
 
 	// Use this for initialization

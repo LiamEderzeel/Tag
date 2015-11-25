@@ -92,6 +92,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: 0
   _angle: 0
+  _tagged: 0
+  players: []
+  _startPos: {x: 0, y: 0, z: 0}
+  toggle: 0
+  aPressed: 0
+  explosionForce: 300
 --- !u!114 &11437788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _control: 1
+  _aPressed: 0
   _controller: 0
 --- !u!136 &13627988
 CapsuleCollider:
@@ -129,6 +136,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7da17ff893305c441b8528b83feeb87d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: explosionForce
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 146834}
