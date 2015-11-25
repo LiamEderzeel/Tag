@@ -12,7 +12,7 @@ public class InputHelper : MonoBehaviour {
 	private string[] _vertical  = {"Vertical1", "Vertical2", "Vertical3", "Vertical4"};
 	private string[] _fire = {"Fire1", "Fire2", "Fire3", "Fire4"};
 	private GameObject _player;
-	private float _movementSpeed = 20f;
+	private float _movementSpeed = 3f;
 	
 	public int Controller
 	{
