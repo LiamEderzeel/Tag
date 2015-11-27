@@ -5,6 +5,7 @@ public class Hand : Player {
 
 	public delegate void TagAction();
 	public static event TagAction OnTag;
+	int i = 0;
 	// Use this for initialization
 
 	public override void Start () {
@@ -17,9 +18,11 @@ public class Hand : Player {
 
 	public override void Ability1()
 	{
+		i++;
+		Debug.Log (i);
 		//Debug.Log("event arrived, controller = " + controller);
 		Player closest = null;
-		float closestsDist = 10;
+		float closestsDist = 3;
 		foreach (Player p in players)
 		{
 			float dist = Mathf.Sqrt (Mathf.Pow((p.transform.position.x - this.transform.position.x),2) + (Mathf.Pow((p.transform.position.z - this.transform.position.z),2)));

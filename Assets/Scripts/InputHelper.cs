@@ -13,7 +13,7 @@ public class InputHelper : MonoBehaviour {
 	private string[] _fire = {"Fire1", "Fire2", "Fire3", "Fire4"};
 	//private string[] _fire = {"joystick 1", "joystick 2", "joystick 3", "joystick 4"};
 	private GameObject _player;
-	private float _movementSpeed = 3f;
+	[SerializeField] private float _movementSpeed = 2f;
 	
 	public int Controller
 	{
@@ -50,10 +50,13 @@ public class InputHelper : MonoBehaviour {
 		float vertical = Input.GetAxis(_vertical[_controller]);
 		//if(!_aPressed)
 		//	aButton = Input.GetAxis (_fire[_controller]);
-		if(Input.GetButtonDown(_fire[_controller]))
-		{
-			_aPressed = true;
-		}
+		if (!_aPressed)
+			if(Input.GetButtonDown(_fire[_controller]))
+			{
+				_aPressed = true;
+				Debug.Log ("2X");
+				StartCoroutine(Wait (1000));
+			}
 
 
 		//Debug.Log (aButton);
@@ -78,15 +81,15 @@ public class InputHelper : MonoBehaviour {
         
         if(_aPressed)
 		{
-			Debug.Log ("test");
-            _player.GetComponent<Player>().Ability1();
-			StartCoroutine(Wait (10));
+            
+
 		}
         
     }
 
 	IEnumerator Wait(int millis)
 	{
+		_player.GetComponent<Player>().Ability1();
 		yield return new WaitForSeconds(millis/1000);
 		_aPressed = !_aPressed;
 	}

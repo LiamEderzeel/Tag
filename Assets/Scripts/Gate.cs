@@ -25,7 +25,7 @@ public class Gate : MonoBehaviour {
 		_open = false;
 		GateColor();
 		_colliders[3].isTrigger = false;
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(15);
 		_open = true;
 		GateColor();
 		_colliders[3].isTrigger = true;
