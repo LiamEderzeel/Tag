@@ -50,7 +50,12 @@ public class InputHelper : MonoBehaviour {
 		float vertical = Input.GetAxis(_vertical[_controller]);
 		//if(!_aPressed)
 		//	aButton = Input.GetAxis (_fire[_controller]);
-		_aPressed = Input.GetButtonDown(_fire[_controller]);
+		if(Input.GetButtonDown(_fire[_controller]))
+		{
+			_aPressed = true;
+		}
+
+
 		//Debug.Log (aButton);
 		float threhold =0.2f;
 		
@@ -62,7 +67,6 @@ public class InputHelper : MonoBehaviour {
 			vertical = 0f;
 		}
 
-		
 		m_Input = new Vector2(-horizontal, -vertical);
 		_angle = Mathf.Atan2(-horizontal, -vertical) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y - 180;
         _player.GetComponent<Player>().Angle = _angle;
@@ -74,6 +78,7 @@ public class InputHelper : MonoBehaviour {
         
         if(_aPressed)
 		{
+			Debug.Log ("test");
             _player.GetComponent<Player>().Ability1();
 			StartCoroutine(Wait (10));
 		}

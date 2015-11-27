@@ -33,7 +33,7 @@ public class Runner : Player {
 		}
 	}*/
 
-	public override void Ability1()
+	/*public override void Ability1()
 	{
 		Debug.Log ("ability");
 		foreach (Player p in players)
@@ -45,7 +45,7 @@ public class Runner : Player {
 			}
 		}
 
-	}
+	}*/
 
 	public override void Reset()
 	{
