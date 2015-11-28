@@ -3,18 +3,26 @@ using System.Collections;
 
 public class Runner : Player {
 
-	[SerializeField] private bool toggle, aPressed;
+	[SerializeField] private bool blink, aPressed;
 	public int explosionForce;
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
-		toggle = false;
+		blink = false;
 		aPressed = false;
 	}
 	// Update is called once per frame
 	public override void Update () {
-		base.Update();
-		gameManager._scores[this.Controller] += 0.001f;
+		if(!_frozen)
+		{
+			base.Update();
+			if(!blink)
+				gameManager._scores[this.Controller] += 0.001f;
+		}
+		if(blink && Time.time % 1 <= .50f)
+			GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+		else if(blink && Time.time % 1 > .50f)
+			GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
 	}
 
 	/*public override void Ability1()
@@ -51,7 +59,18 @@ public class Runner : Player {
 	{
 		base.Reset();
 		this.GetComponent<MeshRenderer>().material.SetColor("_RimCol", Color.clear);
-		toggle = false;
 		aPressed = false;
+	}
+
+	public override IEnumerator Freeze()
+	{
+		GetComponent<InputHelper>()._control = false;
+		_frozen = !_frozen;
+		yield return new WaitForSeconds(10);
+		GetComponent<InputHelper>()._control = true;
+		_frozen = !_frozen;
+		blink = true;
+		yield return new WaitForSeconds(3);
+		blink = false;
 	}
 }

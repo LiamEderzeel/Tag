@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InputHelper : MonoBehaviour {
 	
-	[SerializeField] private bool _control, _aPressed;
+	public bool _control, _aPressed;
 	[SerializeField] private int _controller = 0;
 	private float r_rot, _angle;
 	private Vector2 m_Input;
@@ -77,14 +77,7 @@ public class InputHelper : MonoBehaviour {
         if (m_Input.sqrMagnitude > 1)
         {
             m_Input.Normalize();
-        }
-        
-        if(_aPressed)
-		{
-            
-
-		}
-        
+        }     
     }
 
 	IEnumerator Wait(int millis)

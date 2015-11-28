@@ -6,13 +6,13 @@ public class Player : MonoBehaviour {
 	[SerializeField] protected int _controller = 0;
 	[SerializeField] private float _angle;
 	public float _score;
-	[SerializeField] protected bool _tagged;
 	public List<Player> players;
 	[SerializeField] private Vector3 _startPos;
 	protected GameManager gameManager;
+	public bool _frozen;
 	// Use this for initialization
 	public virtual void Start () {
-		_tagged = false;
+		_frozen = false;
 		_startPos = this.transform.position;
 		gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>() as GameManager;
 	}
@@ -50,5 +50,10 @@ public class Player : MonoBehaviour {
 	{
 		if(Other.gameObject.tag == "KillBox")
 			this.Reset();
+	}
+
+	public virtual IEnumerator Freeze()
+	{
+		yield return null;
 	}
 }

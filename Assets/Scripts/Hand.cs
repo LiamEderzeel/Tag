@@ -2,10 +2,9 @@
 using System.Collections;
 
 public class Hand : Player {
-
-	public delegate void TagAction();
-	public static event TagAction OnTag;
-	int i = 0;
+	
+	private float _tagTimeStamp;
+	private Runner closest = null;
 	// Use this for initialization
 
 	public override void Start () {
@@ -13,17 +12,13 @@ public class Hand : Player {
 	}
 	// Update is called once per frame
 	public override void Update () {
-		base.Update ();
+			base.Update ();
 	}
 
 	public override void Ability1()
 	{
-		i++;
-		Debug.Log (i);
-		//Debug.Log("event arrived, controller = " + controller);
-		Player closest = null;
-		float closestsDist = 3;
-		foreach (Player p in players)
+		float closestsDist = 5;
+		foreach (Runner p in players)
 		{
 			float dist = Mathf.Sqrt (Mathf.Pow((p.transform.position.x - this.transform.position.x),2) + (Mathf.Pow((p.transform.position.z - this.transform.position.z),2)));
 			if(dist <= closestsDist)
@@ -34,18 +29,7 @@ public class Hand : Player {
 		}
 		if(closest != null)
 		{
-			Vector3 tempPos = this.transform.position;
-			int c1 = this.Controller;
-
-			this._controller = closest.Controller;
-			this.gameObject.GetComponent<InputHelper>().Controller = closest.Controller;
-
-			closest.Controller = c1;
-			closest.gameObject.GetComponent<InputHelper>().Controller = c1;
-
-			this.transform.position = closest.transform.position;
-			closest.transform.position = tempPos;
-
+			StartCoroutine (Tag (closest.transform));
 		}
 	}
 
@@ -53,4 +37,40 @@ public class Hand : Player {
 	{
 		base.Reset();
 	}
+
+	IEnumerator Tag(Transform target)
+	{
+
+		GetComponent<InputHelper>()._control = false;
+		foreach (Runner p in players)
+			p.Freeze();
+		
+		int c1 = this.Controller;
+		this._controller = closest.Controller;
+		this.gameObject.GetComponent<InputHelper>().Controller = closest.Controller;
+		
+		closest.Controller = c1;
+		closest.gameObject.GetComponent<InputHelper>().Controller = c1;
+
+        while(Vector3.Distance(transform.position,target.position) > 1f)
+		{
+			transform.LookAt(target);
+			transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
+			yield return null;
+		}
+		yield return new WaitForSeconds(4);
+		GetComponent<InputHelper>()._control = true;
+		//Reset ();
+    }
+
+	/*private void OnCollisionEnter(Collision col)
+	{
+		if (col.gameObject.name == "Runner-1" || col.gameObject.name == "Runner-2" || col.gameObject.name == "Runner-3" )
+		{
+			col.gameObject.GetComponent<Runner>().Tagged = true;
+			_tagging = !_tagging;
+			closest.Tagged = !closest.Tagged;
+
+		}
+	}*/
 }
