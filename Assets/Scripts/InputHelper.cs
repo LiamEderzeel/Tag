@@ -22,6 +22,7 @@ public class InputHelper : MonoBehaviour {
 	
 	public float MovementSpeed
 	{
+		get { return _movementSpeed; }
 		set { _movementSpeed = value; }
 	}
 	

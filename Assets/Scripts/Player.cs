@@ -5,15 +5,19 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 	[SerializeField] protected int _controller = 0;
 	[SerializeField] private float _angle;
-	public float _score;
 	public List<Player> players;
-	[SerializeField] private Vector3 _startPos;
+	[SerializeField] private Vector3 _startPos, _resetPos;
 	protected GameManager gameManager;
 	public bool _frozen;
+	private float _timeStamp;
+	private RaycastHit hit;
+
 	// Use this for initialization
 	public virtual void Start () {
 		_frozen = false;
 		_startPos = this.transform.position;
+		_resetPos = _startPos;
+		StartCoroutine(ResetPos());
 		gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>() as GameManager;
 	}
 	
@@ -46,14 +50,29 @@ public class Player : MonoBehaviour {
 		this.GetComponent<Rigidbody>().velocity = Vector3.zero;
 	}
 
+	private void SoftReset()
+	{
+		this.transform.position = _resetPos + new Vector3(0,1,0);
+		this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		if(this.tag != "Tagger")
+			gameManager._scores[this.Controller] /= 2;
+	}
+
 	public void OnCollisionEnter(Collision Other)
 	{
 		if(Other.gameObject.tag == "KillBox")
-			this.Reset();
+		{
+			this.SoftReset();
+		}
 	}
 
-	public virtual IEnumerator Freeze()
+	private IEnumerator ResetPos()
 	{
-		yield return null;
+		if (Physics.Raycast(this.transform.position, -Vector3.up ,out hit, 5f))
+			if(!hit.collider.isTrigger)
+				_resetPos = this.transform.position;
+		Debug.DrawRay(_resetPos,new Vector3(0, 100, 0),Color.green,2,false);
+		yield return new WaitForSeconds(2);
+		StartCoroutine(ResetPos());
 	}
 }

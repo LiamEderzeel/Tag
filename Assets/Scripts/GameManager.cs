@@ -45,5 +45,5 @@ public class GameManager : MonoBehaviour {
 		{
 			_sliders[i].value = _scores[i]; 
 		}
-	}
+	}	
 }

@@ -9,7 +9,6 @@ public class Runner : Player {
 	public override void Start () {
 		base.Start();
 		blink = false;
-		aPressed = false;
 	}
 	// Update is called once per frame
 	public override void Update () {
@@ -58,19 +57,31 @@ public class Runner : Player {
 	public override void Reset()
 	{
 		base.Reset();
-		this.GetComponent<MeshRenderer>().material.SetColor("_RimCol", Color.clear);
-		aPressed = false;
 	}
 
-	public override IEnumerator Freeze()
+	public void DoCoRoutine(string name)
+	{
+		StartCoroutine(name);
+	}
+
+
+	private IEnumerator Boost()
+	{
+		GetComponent<InputHelper>().MovementSpeed = 4;
+		yield return new WaitForSeconds(6);
+		GetComponent<InputHelper>().MovementSpeed = 2;
+	}
+
+	private IEnumerator Freeze ()
 	{
 		GetComponent<InputHelper>()._control = false;
-		_frozen = !_frozen;
+		blink = true;
+		Debug.Log ("freezing | " + Time.time);
 		yield return new WaitForSeconds(10);
 		GetComponent<InputHelper>()._control = true;
-		_frozen = !_frozen;
-		blink = true;
-		yield return new WaitForSeconds(3);
+		Debug.Log ("unfrozen | " + Time.time);
+		yield return new WaitForSeconds(10);
 		blink = false;
+		GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
 	}
 }

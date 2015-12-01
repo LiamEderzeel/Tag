@@ -12,12 +12,12 @@ public class Hand : Player {
 	}
 	// Update is called once per frame
 	public override void Update () {
-			base.Update ();
+		base.Update ();
 	}
 
 	public override void Ability1()
 	{
-		float closestsDist = 5;
+		float closestsDist = 3;
 		foreach (Runner p in players)
 		{
 			float dist = Mathf.Sqrt (Mathf.Pow((p.transform.position.x - this.transform.position.x),2) + (Mathf.Pow((p.transform.position.z - this.transform.position.z),2)));
@@ -29,6 +29,8 @@ public class Hand : Player {
 		}
 		if(closest != null)
 		{
+			StartCoroutine (Freeze());
+			closest.DoCoRoutine("Freeze");
 			StartCoroutine (Tag (closest.transform));
 		}
 	}
@@ -37,40 +39,25 @@ public class Hand : Player {
 	{
 		base.Reset();
 	}
-
 	IEnumerator Tag(Transform target)
-	{
-
-		GetComponent<InputHelper>()._control = false;
-		foreach (Runner p in players)
-			p.Freeze();
-		
-		int c1 = this.Controller;
-		this._controller = closest.Controller;
-		this.gameObject.GetComponent<InputHelper>().Controller = closest.Controller;
-		
-		closest.Controller = c1;
-		closest.gameObject.GetComponent<InputHelper>().Controller = c1;
-
+	{			
         while(Vector3.Distance(transform.position,target.position) > 1f)
 		{
 			transform.LookAt(target);
 			transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
 			yield return null;
 		}
-		yield return new WaitForSeconds(4);
-		GetComponent<InputHelper>()._control = true;
-		//Reset ();
+		int c1 = this.Controller;
+		this._controller = closest.Controller;
+		this.gameObject.GetComponent<InputHelper>().Controller = closest.Controller;
+		
+		closest.Controller = c1;
+		closest.gameObject.GetComponent<InputHelper>().Controller = c1;
     }
-
-	/*private void OnCollisionEnter(Collision col)
+	private IEnumerator Freeze ()
 	{
-		if (col.gameObject.name == "Runner-1" || col.gameObject.name == "Runner-2" || col.gameObject.name == "Runner-3" )
-		{
-			col.gameObject.GetComponent<Runner>().Tagged = true;
-			_tagging = !_tagging;
-			closest.Tagged = !closest.Tagged;
-
-		}
-	}*/
+		GetComponent<InputHelper>()._control = false;
+		yield return new WaitForSeconds(40);
+		GetComponent<InputHelper>()._control = true;
+	}
 }
