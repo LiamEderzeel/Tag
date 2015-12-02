@@ -54,7 +54,7 @@ public class InputHelper : MonoBehaviour {
 			if(Input.GetButtonDown(_fire[_controller]))
 			{
 				_aPressed = true;
-				StartCoroutine(Wait (1000));
+				StartCoroutine(Wait (20));
 			}
 
 
@@ -79,10 +79,10 @@ public class InputHelper : MonoBehaviour {
         }     
     }
 
-	IEnumerator Wait(int millis)
+	IEnumerator Wait(int s)
 	{
 		_player.GetComponent<Player>().Ability1();
-		yield return new WaitForSeconds(millis/1000);
+		yield return new WaitForSeconds(s);
 		_aPressed = !_aPressed;
 	}
 }

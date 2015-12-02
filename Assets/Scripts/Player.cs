@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 	[SerializeField] protected int _controller = 0;
 	[SerializeField] private float _angle;
+	protected bool _frozen;
 	public List<Player> players;
 	[SerializeField] private Vector3 _startPos, _resetPos, _screenPos;
 	protected GameManager gameManager;
-	public bool _frozen;
 	private float _timeStamp;
 	private RaycastHit hit;
 
@@ -70,10 +70,11 @@ public class Player : MonoBehaviour {
 	private IEnumerator ResetPos()
 	{
 		if (Physics.Raycast(this.transform.position, -Vector3.up ,out hit, 5f))
-			if(!hit.collider.isTrigger)
+			if(hit.collider.name != "KillBox")
 				_resetPos = this.transform.position;
 		Debug.DrawRay(_resetPos,new Vector3(0, 100, 0),Color.green,2,false);
 		yield return new WaitForSeconds(2);
+		yield return new WaitForFixedUpdate();
 		StartCoroutine(ResetPos());
 	}
 }

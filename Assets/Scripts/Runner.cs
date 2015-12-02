@@ -23,37 +23,7 @@ public class Runner : Player {
 		else if(blink && Time.time % 1 > .50f)
 			GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
 	}
-
-	/*public override void Ability1()
-	{
-		//Debug.Log("event arrived, controller = " + controller);
-		this.transform.position += new Vector3(0,0.1f,0);
-		if (!toggle && !aPressed)
-		{
-			this.GetComponent<MeshRenderer>().material.SetColor("_RimCol", Color.red);
-			toggle = !toggle;
-		}
-		else if (toggle && !aPressed)
-		{
-			this.GetComponent<MeshRenderer>().material.SetColor("_RimCol", Color.clear);
-			toggle = !toggle;
-		}
-	}*/
-
-	/*public override void Ability1()
-	{
-		Debug.Log ("ability");
-		foreach (Player p in players)
-		{
-			Debug.Log ("found player " + p);
-			if (Mathf.Abs(Vector3.Distance(this.transform.position, p.transform.position)) <= 20)
-			{
-				p.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, this.transform.position, 20, 100);
-			}
-		}
-
-	}*/
-
+	
 	public override void Reset()
 	{
 		base.Reset();

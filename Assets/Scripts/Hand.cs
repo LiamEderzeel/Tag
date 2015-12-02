@@ -5,7 +5,7 @@ public class Hand : Player {
 	
 	private float _tagTimeStamp;
 	private Runner closest = null;
-    private bool _frozen = false;
+	private RaycastHit hit;
 	// Use this for initialization
 
 	public override void Start () {
@@ -17,14 +17,14 @@ public class Hand : Player {
 
         float dot;
         Vector3 taggerToTarget, norm;
-        //if( !_frozen )
+        if( !_frozen )
         foreach( Runner p in players )
         {
             taggerToTarget = ( p.transform.position - this.transform.position );
             norm = taggerToTarget.normalized;
             dot = Vector3.Dot( norm, this.transform.right );
             Debug.DrawRay( this.transform.position, taggerToTarget, Color.red );
-            if( dot >= 0.5f && taggerToTarget.magnitude <= 3 )
+            if( dot >= 0.6f && taggerToTarget.magnitude <= 3 )
             {
                 StartCoroutine( Freeze( ) );
                 p.DoCoRoutine( "Freeze" );
@@ -37,8 +37,8 @@ public class Hand : Player {
     public override void Ability1 ( )
     {
 
-        GetComponent<Rigidbody>( ).AddForce( transform.right * 300 );
-        GetComponent<Rigidbody>( ).AddForce( 0, 200, 0 );      
+        GetComponent<Rigidbody>( ).AddForce( transform.right * 200 );
+        GetComponent<Rigidbody>( ).AddForce( 0, 300, 0 );      
     }
 
 	public override void Reset()
@@ -59,7 +59,7 @@ public class Hand : Player {
 	{
         _frozen = !_frozen;
 		GetComponent<InputHelper>()._control = false;
-		yield return new WaitForSeconds(40);
+		yield return new WaitForSeconds(20);
         _frozen = !_frozen;
 		GetComponent<InputHelper>()._control = true;
 	}
