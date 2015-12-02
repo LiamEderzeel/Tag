@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 	[SerializeField] protected int _controller = 0;
