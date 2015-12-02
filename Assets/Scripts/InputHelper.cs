@@ -46,7 +46,6 @@ public class InputHelper : MonoBehaviour {
 	
 	private void GetInput ()
 	{
-		float aButton = 0f;
 		float horizontal = Input.GetAxis(_horizontal[_controller]);
 		float vertical = Input.GetAxis(_vertical[_controller]);
 		//if(!_aPressed)
@@ -55,7 +54,6 @@ public class InputHelper : MonoBehaviour {
 			if(Input.GetButtonDown(_fire[_controller]))
 			{
 				_aPressed = true;
-				Debug.Log ("2X");
 				StartCoroutine(Wait (1000));
 			}
 

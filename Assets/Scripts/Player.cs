@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
 	[SerializeField] protected int _controller = 0;
 	[SerializeField] private float _angle;
 	public List<Player> players;
-	[SerializeField] private Vector3 _startPos, _resetPos;
+	[SerializeField] private Vector3 _startPos, _resetPos, _screenPos;
 	protected GameManager gameManager;
 	public bool _frozen;
 	private float _timeStamp;
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	public virtual void Update () {
 		this.gameObject.transform.eulerAngles = new Vector3(0,_angle,0);
+
 	}
 
 	public int Controller
