@@ -6,15 +6,22 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
 	[SerializeField] protected int _controller = 0;
 	[SerializeField] private float _angle;
+	public Vector3 direction;
 	protected bool _frozen;
 	public List<Player> players;
 	[SerializeField] private Vector3 _startPos, _resetPos, _screenPos;
 	protected GameManager gameManager;
 	private float _timeStamp;
 	private RaycastHit hit;
+	private TextMesh _textMesh;
 
 	// Use this for initialization
 	public virtual void Start () {
+		direction = Vector3.zero;
+		_textMesh = GetComponentInChildren<TextMesh>();
+		_textMesh.fontSize = 20;
+		_textMesh.characterSize = .5f;
+		_textMesh.text = (Controller + 1).ToString();
 		_frozen = false;
 		_startPos = this.transform.position;
 		_resetPos = _startPos;
@@ -25,8 +32,17 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	public virtual void Update () {
 		this.gameObject.transform.eulerAngles = new Vector3(0,_angle,0);
+		_textMesh.text = (Controller + 1).ToString();
 
-	}
+		Vector3 v = Camera.main.transform.position - _textMesh.transform.position;
+		
+		v.x = v.z = 0.0f;
+		
+		_textMesh.transform.LookAt( Camera.main.transform.position - v );
+		
+		_textMesh.transform.rotation =(Camera.main.transform.rotation);
+        
+    }
 
 	public int Controller
 	{

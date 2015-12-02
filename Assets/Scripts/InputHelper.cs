@@ -41,6 +41,7 @@ public class InputHelper : MonoBehaviour {
 			Vector3 desiredMove = new Vector3(m_Input.x, 0, m_Input.y);
 			this.gameObject.transform.eulerAngles = new Vector3(0, Camera.main.transform.eulerAngles.y - 90, 0);
 			this.gameObject.transform.Translate(desiredMove * Time.deltaTime * _movementSpeed);
+			this.gameObject.GetComponent<Player>().direction = desiredMove;
 		}
 	}
 	
