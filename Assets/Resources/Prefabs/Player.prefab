@@ -92,10 +92,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: 0
   _angle: 0
-  _tagged: 0
   players: []
   _startPos: {x: 0, y: 0, z: 0}
-  toggle: 0
+  _resetPos: {x: 0, y: 0, z: 0}
+  _screenPos: {x: 0, y: 0, z: 0}
+  _frozen: 0
+  blink: 0
   aPressed: 0
   explosionForce: 300
 --- !u!114 &11437788
@@ -112,6 +114,7 @@ MonoBehaviour:
   _control: 1
   _aPressed: 0
   _controller: 0
+  _movementSpeed: 2
 --- !u!136 &13627988
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -139,6 +142,30 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: explosionForce
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

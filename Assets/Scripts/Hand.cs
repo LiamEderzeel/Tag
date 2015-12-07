@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Hand : Player {
-
-	public delegate void TagAction();
-	public static event TagAction OnTag;
-	int i = 0;
+	
+	private float _tagTimeStamp;
+	private Runner closest = null;
+	private RaycastHit hit;
 	// Use this for initialization
 
 	public override void Start () {
@@ -14,43 +14,53 @@ public class Hand : Player {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update ();
+
+        float dot;
+        Vector3 taggerToTarget, norm;
+        if( !_frozen )
+        foreach( Runner p in players )
+        {
+            taggerToTarget = ( p.transform.position - this.transform.position );
+            norm = taggerToTarget.normalized;
+            dot = Vector3.Dot( norm, this.transform.right );
+            Debug.DrawRay( this.transform.position, taggerToTarget, Color.red );
+            if( dot >= 0.6f && taggerToTarget.magnitude <= 3 )
+            {
+                StartCoroutine( Freeze( ) );
+                p.DoCoRoutine( "Freeze" );
+                Tag( p.gameObject);
+                break;
+            }
+        }
 	}
 
-	public override void Ability1()
-	{
-		i++;
-		Debug.Log (i);
-		//Debug.Log("event arrived, controller = " + controller);
-		Player closest = null;
-		float closestsDist = 3;
-		foreach (Player p in players)
-		{
-			float dist = Mathf.Sqrt (Mathf.Pow((p.transform.position.x - this.transform.position.x),2) + (Mathf.Pow((p.transform.position.z - this.transform.position.z),2)));
-			if(dist <= closestsDist)
-			{
-				closestsDist = dist;
-				closest = p;
-			}
-		}
-		if(closest != null)
-		{
-			Vector3 tempPos = this.transform.position;
-			int c1 = this.Controller;
+    public override void Ability1 ( )
+    {
 
-			this._controller = closest.Controller;
-			this.gameObject.GetComponent<InputHelper>().Controller = closest.Controller;
-
-			closest.Controller = c1;
-			closest.gameObject.GetComponent<InputHelper>().Controller = c1;
-
-			this.transform.position = closest.transform.position;
-			closest.transform.position = tempPos;
-
-		}
-	}
+        GetComponent<Rigidbody>( ).AddForce( transform.right * 200 );
+        GetComponent<Rigidbody>( ).AddForce( 0, 300, 0 );      
+    }
 
 	public override void Reset()
 	{
 		base.Reset();
+	}
+	void Tag(GameObject target)
+	{
+        Runner r = target.GetComponent<Runner>( );
+		int c1 = this.Controller;
+		this._controller = r.Controller;
+		this.gameObject.GetComponent<InputHelper>().Controller = r.Controller;
+		
+		r.Controller = c1;
+		r.gameObject.GetComponent<InputHelper>().Controller = c1;
+    }
+	private IEnumerator Freeze ()
+	{
+        _frozen = !_frozen;
+		GetComponent<InputHelper>()._control = false;
+		yield return new WaitForSeconds(20);
+        _frozen = !_frozen;
+		GetComponent<InputHelper>()._control = true;
 	}
 }

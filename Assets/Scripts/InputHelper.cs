@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InputHelper : MonoBehaviour {
 	
-	[SerializeField] private bool _control, _aPressed;
+	public bool _control, _aPressed;
 	[SerializeField] private int _controller = 0;
 	private float r_rot, _angle;
 	private Vector2 m_Input;
@@ -22,6 +22,7 @@ public class InputHelper : MonoBehaviour {
 	
 	public float MovementSpeed
 	{
+		get { return _movementSpeed; }
 		set { _movementSpeed = value; }
 	}
 	
@@ -40,12 +41,12 @@ public class InputHelper : MonoBehaviour {
 			Vector3 desiredMove = new Vector3(m_Input.x, 0, m_Input.y);
 			this.gameObject.transform.eulerAngles = new Vector3(0, Camera.main.transform.eulerAngles.y - 90, 0);
 			this.gameObject.transform.Translate(desiredMove * Time.deltaTime * _movementSpeed);
+			this.gameObject.GetComponent<Player>().direction = desiredMove;
 		}
 	}
 	
 	private void GetInput ()
 	{
-		float aButton = 0f;
 		float horizontal = Input.GetAxis(_horizontal[_controller]);
 		float vertical = Input.GetAxis(_vertical[_controller]);
 		//if(!_aPressed)
@@ -54,8 +55,7 @@ public class InputHelper : MonoBehaviour {
 			if(Input.GetButtonDown(_fire[_controller]))
 			{
 				_aPressed = true;
-				Debug.Log ("2X");
-				StartCoroutine(Wait (1000));
+				StartCoroutine(Wait (20));
 			}
 
 
@@ -77,20 +77,13 @@ public class InputHelper : MonoBehaviour {
         if (m_Input.sqrMagnitude > 1)
         {
             m_Input.Normalize();
-        }
-        
-        if(_aPressed)
-		{
-            
-
-		}
-        
+        }     
     }
 
-	IEnumerator Wait(int millis)
+	IEnumerator Wait(int s)
 	{
 		_player.GetComponent<Player>().Ability1();
-		yield return new WaitForSeconds(millis/1000);
+		yield return new WaitForSeconds(s);
 		_aPressed = !_aPressed;
 	}
 }

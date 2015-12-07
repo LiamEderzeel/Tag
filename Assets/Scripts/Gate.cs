@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Gate : MonoBehaviour {
 	private bool _open;
+	private Vector3 dir1, dir2;
 	private Renderer _renderers;
 	[SerializeField] private Collider[] _colliders  = new Collider[5];
 	[SerializeField] private Material[] _materials = new Material[2];
@@ -14,17 +15,26 @@ public class Gate : MonoBehaviour {
 		_renderers.material = _materials[0];
 	}
 
+
+	private void OnTriggerEnter(Collider collider)
+	{
+		dir1 = collider.gameObject.GetComponent<Player>().direction;
+		Debug.Log (dir1);
+	}
 	private void OnTriggerExit(Collider collider)
 	{
-		StartCoroutine(Close());
+		dir2 = collider.gameObject.GetComponent<Player>().direction;
+		Debug.Log (dir2);
+		Debug.Log (Vector3.Dot(dir1, dir2));
+		if(Vector3.Dot(dir1, dir2) > 0.50)
+			StartCoroutine(Close());
 	}
 	
 	private IEnumerator Close()
 	{
-		yield return new WaitForSeconds(0.1f);
+		_colliders[3].isTrigger = false;
 		_open = false;
 		GateColor();
-		_colliders[3].isTrigger = false;
 		yield return new WaitForSeconds(15);
 		_open = true;
 		GateColor();
