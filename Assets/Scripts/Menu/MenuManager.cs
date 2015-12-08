@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum MenuState {Main, Controls};
+public enum MenuState {Main, Controls, Ready};
 
 public class MenuManager : MonoBehaviour
 {
     private MenuState _menuState;
     [SerializeField] private GameObject _main;
     [SerializeField] private GameObject _controls;
+    [SerializeField] private GameObject _ready;
 
     private void Update()
     {
@@ -26,14 +27,14 @@ public class MenuManager : MonoBehaviour
 
 	private void Awake ()
     {
-        _menuState = MenuState.Main;
-        _controls.SetActive(false);
+        ChangeState(MenuState.Main);
 	}
 
     private void ChangeState(MenuState newState)
     {
         _main.SetActive(false);
         _controls.SetActive(false);
+        _ready.SetActive(false);
 
         if(newState == MenuState.Main)
         {
@@ -45,6 +46,11 @@ public class MenuManager : MonoBehaviour
             _menuState = MenuState.Controls;
             _controls.SetActive(true);
         }
+        else if(newState == MenuState.Ready)
+        {
+            _menuState = MenuState.Ready;
+            _ready.SetActive(true);
+        }
     }
 
     public void SetMain()
@@ -55,6 +61,11 @@ public class MenuManager : MonoBehaviour
     public void SetControls()
     {
         ChangeState(MenuState.Controls);
+    }
+
+    public void SetReady()
+    {
+        ChangeState(MenuState.Ready);
     }
 
     public void Quit()
