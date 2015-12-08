@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour {
 	{
 		get{return _players;}
 	}
-	// Update is called once per frame
-	void Update () {
+
+	private void Update ()
+    {
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			foreach(Player p in _players)
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour {
 
 		for(int i = 0; i < _scores.Count; ++i)
 		{
-			_sliders[i].value = _scores[i]; 
+			_sliders[i].value = _scores[i];
 		}
-	}	
+	}
 }

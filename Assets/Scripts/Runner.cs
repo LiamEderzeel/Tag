@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Runner : Player {
 
+    [SerializeField] private float _scorePerFrame = 0.0002f;
 	[SerializeField] private bool blink, aPressed;
 	public int explosionForce;
 	// Use this for initialization
@@ -16,14 +17,14 @@ public class Runner : Player {
 		{
 			base.Update();
 			if(!blink)
-				gameManager._scores[this.Controller] += 0.001f;
+				gameManager._scores[this.Controller] += _scorePerFrame;
 		}
 		if(blink && Time.time % 1 <= .50f)
 			GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
 		else if(blink && Time.time % 1 > .50f)
 			GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
 	}
-	
+
 	public override void Reset()
 	{
 		base.Reset();

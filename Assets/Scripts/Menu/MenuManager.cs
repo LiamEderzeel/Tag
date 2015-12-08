@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum MenuState {Main, Controls, Ready};
+public enum MenuState {Main, Controls, Ready, Game};
 
 public class MenuManager : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _main;
     [SerializeField] private GameObject _controls;
     [SerializeField] private GameObject _ready;
+    [SerializeField] private GameObject _game;
 
     private void Update()
     {
@@ -35,6 +36,7 @@ public class MenuManager : MonoBehaviour
         _main.SetActive(false);
         _controls.SetActive(false);
         _ready.SetActive(false);
+        _game.SetActive(false);
 
         if(newState == MenuState.Main)
         {
@@ -50,6 +52,11 @@ public class MenuManager : MonoBehaviour
         {
             _menuState = MenuState.Ready;
             _ready.SetActive(true);
+        }
+        else if(newState == MenuState.Game)
+        {
+            _menuState = MenuState.Game;
+            _game.SetActive(true);
         }
     }
 
@@ -75,6 +82,7 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
-         Application.LoadLevel("level_2");
+         //Application.LoadLevel("level_2");
+        ChangeState(MenuState.Game);
     }
 }
