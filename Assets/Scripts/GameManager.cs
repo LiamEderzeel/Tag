@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 	public List<float> _scores;
 	public List<Player> _players;
 	[SerializeField] private Slider[] _sliders = new Slider[4];
+    [SerializeField] private MenuManager _menuManager;
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +36,10 @@ public class GameManager : MonoBehaviour {
 
 	private void Update ()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            _menuManager.SetEnd();
+        }
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			foreach(Player p in _players)
@@ -45,6 +50,10 @@ public class GameManager : MonoBehaviour {
 		for(int i = 0; i < _scores.Count; ++i)
 		{
 			_sliders[i].value = _scores[i];
+            if( _scores[i] >= 1)
+            {
+                _menuManager.SetEnd();
+            }
 		}
 	}
 }
