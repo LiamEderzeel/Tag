@@ -56,4 +56,14 @@ public class MenuManager : MonoBehaviour
     {
         ChangeState(MenuState.Controls);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Play()
+    {
+         Application.LoadLevel("level_2");
+    }
 }
