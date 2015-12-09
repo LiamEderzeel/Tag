@@ -18,9 +18,7 @@ public class MenuEnd : MonoBehaviour {
         }
 
         Sort( _scores );
-
 	}
-
 
     void Sort(float[,] A)
     {
@@ -41,9 +39,13 @@ public class MenuEnd : MonoBehaviour {
                 j--;
             }
         }
-        for( int i = 0 ; i < 4 ; i++ )
-            Debug.Log( A[ i, 0 ] + " | " + A[ i, 1 ] );
+        for(int i = 0; i < 4; ++i)
+        {
+            int number = _scores[i,1] as int;
+            _images[i] = _sprites[number];
+        }
     }
+
 	private void Update ()
     {
 	}
