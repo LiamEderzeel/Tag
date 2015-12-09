@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Hand : Player {
@@ -6,6 +7,10 @@ public class Hand : Player {
 	private float _tagTimeStamp;
 	private Runner closest = null;
 	private RaycastHit hit;
+    [SerializeField] private Image _cooldown;
+    [SerializeField]
+    private Canvas _canvas;
+    private bool cooldown;
 	// Use this for initialization
 
 	public override void Start () {
@@ -15,6 +20,10 @@ public class Hand : Player {
 	public override void Update () {
 		base.Update ();
         PlayerNumber( );
+        CooldownBar( _canvas );
+        if( cooldown )
+            _cooldown.transform.localScale += new Vector3((Time.deltaTime / 20), 0, 0 );
+
         float dot;
         Vector3 taggerToTarget, norm;
         if( !_frozen )
@@ -32,13 +41,36 @@ public class Hand : Player {
                 break;
             }
         }
+
+
 	}
 
+    protected void CooldownBar (Canvas c )
+    {
+
+        Vector3 v = Camera.main.transform.position - c.transform.position;
+
+        v.x = v.z = 0.0f;
+
+        c.transform.LookAt( Camera.main.transform.position - v );
+        c.transform.rotation = ( Camera.main.transform.rotation );
+
+
+    }
     public override void Ability1 ( )
     {
 
         GetComponent<Rigidbody>( ).AddForce( transform.right * 200 );
-        GetComponent<Rigidbody>( ).AddForce( 0, 300, 0 );      
+        GetComponent<Rigidbody>( ).AddForce( 0, 300, 0 );
+        _cooldown.transform.localScale = new Vector3(0,1f,0);
+        StartCoroutine(Cooldown(20));
+    }
+
+    private IEnumerator Cooldown(float s)
+    {
+        cooldown = !cooldown;
+        yield return new WaitForSeconds( s );
+        cooldown = !cooldown;
     }
 
 	public override void Reset()
