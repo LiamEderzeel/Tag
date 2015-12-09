@@ -22,6 +22,11 @@ public class MenuReady : MonoBehaviour
 
     void Update ()
     {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            _menuManager.Play();
+        }
+
         if(_ready[0] && _ready[1] && _ready[2] && _ready[3])
         {
             _next.sprite = _nextSprites[1];
