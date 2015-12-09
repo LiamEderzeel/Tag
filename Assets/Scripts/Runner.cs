@@ -13,7 +13,7 @@ public class Runner : Player {
 	}
 	// Update is called once per frame
 	public override void Update () {
-		if(!_frozen)
+  		if(!_frozen)
 		{
 			base.Update();
 			if(!blink)
@@ -23,6 +23,9 @@ public class Runner : Player {
 			GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
 		else if(blink && Time.time % 1 > .50f)
 			GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+
+        this.gameObject.transform.eulerAngles = new Vector3(0, Camera.main.transform.eulerAngles.y + 180, 0);
+        PlayerNumber( );
 	}
 
 	public override void Reset()
@@ -53,6 +56,6 @@ public class Runner : Player {
 		Debug.Log ("unfrozen | " + Time.time);
 		yield return new WaitForSeconds(10);
 		blink = false;
-		GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+		GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
 	}
 }

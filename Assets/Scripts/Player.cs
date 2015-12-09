@@ -33,15 +33,20 @@ public class Player : MonoBehaviour {
 	public virtual void Update () {
 		this.gameObject.transform.eulerAngles = new Vector3(0,_angle,0);
 		_textMesh.text = (Controller + 1).ToString();
-
-		Vector3 v = Camera.main.transform.position - _textMesh.transform.position;
-		
-		v.x = v.z = 0.0f;
-		
-		_textMesh.transform.LookAt( Camera.main.transform.position - v );
-		
-		_textMesh.transform.rotation =(Camera.main.transform.rotation);
         
+    }
+
+    protected void PlayerNumber()
+    {
+
+        Vector3 v = Camera.main.transform.position - _textMesh.transform.position;
+
+        v.x = v.z = 0.0f;
+
+        _textMesh.transform.LookAt( Camera.main.transform.position - v );
+        _textMesh.transform.rotation = ( Camera.main.transform.rotation );
+        
+
     }
 
 	public int Controller

@@ -14,7 +14,7 @@ public class Hand : Player {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update ();
-
+        PlayerNumber( );
         float dot;
         Vector3 taggerToTarget, norm;
         if( !_frozen )
