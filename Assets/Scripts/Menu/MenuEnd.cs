@@ -41,8 +41,8 @@ public class MenuEnd : MonoBehaviour {
         }
         for(int i = 0; i < 4; ++i)
         {
-            int number = _scores[i,1] as int;
-            _images[i] = _sprites[number];
+            int number = (int)(_scores[i,1]);
+            _images[i].sprite = _sprites[number];
         }
     }
 
