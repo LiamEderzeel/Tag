@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
             case GameState.Main:
                 break;
             case GameState.Controls:
-                if(Input.GetButtonDown("Fire1"))
+                if(Input.GetButtonDown("B1") || Input.GetButtonDown("B2") || Input.GetButtonDown("B3") || Input.GetButtonDown("B4"))
                 {
                     SetMain();
                 }
