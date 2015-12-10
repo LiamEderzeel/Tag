@@ -9,11 +9,20 @@ public class GameManager : MonoBehaviour {
 	public List<Player> _players;
 	[SerializeField] private Slider[] _sliders = new Slider[4];
     [SerializeField] private MenuManager _menuManager;
+    [SerializeField]
+    private Material[ ] _mats = new Material[ 3 ];
 
 	// Use this for initialization
 	void Start () {
 		AssignController();
+        AssignMaterials( );
 	}
+
+    private void AssignMaterials()
+    {
+        for (int i = 1; i < 4; i++)
+            _players[ i ].GetComponent<MeshRenderer>( ).material = _mats[ i - 1 ];
+    }
 
 
 	public void AssignController()
