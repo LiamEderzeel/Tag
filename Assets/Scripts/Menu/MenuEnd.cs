@@ -8,6 +8,7 @@ public class MenuEnd : MonoBehaviour {
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private Image[]  _images = new Image[4];
     [SerializeField] private Sprite[] _sprites = new Sprite[4];
+    [SerializeField] private MenuManager _menuManager;
 
 	private void Start ()
     {
@@ -39,6 +40,7 @@ public class MenuEnd : MonoBehaviour {
                 j--;
             }
         }
+
         for(int i = 0; i < 4; ++i)
         {
             int number = (int)(_scores[i,1]);
@@ -46,7 +48,16 @@ public class MenuEnd : MonoBehaviour {
         }
     }
 
-	private void Update ()
+    private void Update ()
     {
-	}
+        if(Input.GetButtonDown("B1") || Input.GetButtonDown("B2") || Input.GetButtonDown("B3") || Input.GetButtonDown("B4"))
+        {
+            _menuManager.SetMain();
+        }
+        if(Input.GetButtonDown("A1") || Input.GetButtonDown("A2") || Input.GetButtonDown("A3") || Input.GetButtonDown("A4"))
+        {
+            _gameManager.Reset();
+            _menuManager.Play();
+        }
+    }
 }

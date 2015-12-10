@@ -56,4 +56,12 @@ public class GameManager : MonoBehaviour {
             }
 		}
 	}
+
+    public void Reset()
+    {
+        for(int i = 0; i < _players.Count; ++i)
+        {
+            _players[i].Reset();
+        }
+    }
 }

@@ -28,20 +28,20 @@ public class Player : MonoBehaviour {
 		StartCoroutine(ResetPos());
 		gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>() as GameManager;
 	}
-	
+
 	// Update is called once per frame
 	public virtual void Update () {
 		this.gameObject.transform.eulerAngles = new Vector3(0,_angle,0);
 		_textMesh.text = (Controller + 1).ToString();
 
 		Vector3 v = Camera.main.transform.position - _textMesh.transform.position;
-		
+
 		v.x = v.z = 0.0f;
-		
+
 		_textMesh.transform.LookAt( Camera.main.transform.position - v );
-		
+
 		_textMesh.transform.rotation =(Camera.main.transform.rotation);
-        
+
     }
 
 	public int Controller
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
 		get{return _angle;}
 		set{_angle = value;}
 	}
-    
+
 
 	public virtual void Ability1 ()
 	{
@@ -66,6 +66,7 @@ public class Player : MonoBehaviour {
 	{
 		this.transform.position = _startPos;
 		this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameManager._scores[this.Controller] = 0;
 	}
 
 	private void SoftReset()

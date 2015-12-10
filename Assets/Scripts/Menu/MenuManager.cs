@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _ready;
     [SerializeField] private GameObject _game;
     [SerializeField] private GameObject _end;
+    [SerializeField] private GameManager _gameManager;
     private bool _pauzed;
 
     private void Update()
@@ -95,6 +96,7 @@ public class MenuManager : MonoBehaviour
     public void Play()
     {
         //Application.LoadLevel("level_2");
+        //_gameManager.Reset();
         _changeState(GameState.Game);
     }
 
