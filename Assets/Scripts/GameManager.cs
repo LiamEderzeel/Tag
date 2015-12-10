@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour {
 			_sliders[i].value = _scores[i];
             if( _scores[i] >= 1)
             {
+                Reset();
                 _menuManager.SetEnd();
             }
 		}

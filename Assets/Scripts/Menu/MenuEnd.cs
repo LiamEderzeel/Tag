@@ -56,7 +56,6 @@ public class MenuEnd : MonoBehaviour {
         }
         if(Input.GetButtonDown("A1") || Input.GetButtonDown("A2") || Input.GetButtonDown("A3") || Input.GetButtonDown("A4"))
         {
-            _gameManager.Reset();
             _menuManager.Play();
         }
     }
