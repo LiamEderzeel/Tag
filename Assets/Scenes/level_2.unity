@@ -7709,6 +7709,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 761190768}
     m_Modifications:
+    - target: {fileID: 11442174, guid: 06d2dfd22fd7df542b0bfb431f1a9104, type: 2}
+      propertyPath: _clips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 144296, guid: 06d2dfd22fd7df542b0bfb431f1a9104, type: 2}
       propertyPath: m_Name
       value: Tagger
@@ -7749,6 +7753,14 @@ Prefab:
       propertyPath: _tagClip
       value: 
       objectReference: {fileID: 8300000, guid: 0a2bcdafbdc2e0b4aac3caabccb69f09, type: 3}
+    - target: {fileID: 11442174, guid: 06d2dfd22fd7df542b0bfb431f1a9104, type: 2}
+      propertyPath: _clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a2bcdafbdc2e0b4aac3caabccb69f09, type: 3}
+    - target: {fileID: 11442174, guid: 06d2dfd22fd7df542b0bfb431f1a9104, type: 2}
+      propertyPath: _clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4a689c0add0b4f5489d77eddb9640c83, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06d2dfd22fd7df542b0bfb431f1a9104, type: 2}
   m_IsPrefabParent: 0
