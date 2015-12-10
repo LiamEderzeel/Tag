@@ -11,6 +11,7 @@ public class Hand : Player {
     [SerializeField]
     private Canvas _canvas;
     private bool cooldown;
+	[SerializeField] private AudioClip _tagClip;
 	// Use this for initialization
 
 	public override void Start () {
@@ -79,6 +80,7 @@ public class Hand : Player {
 	}
 	void Tag(GameObject target)
 	{
+		AudioSource.PlayClipAtPoint(_tagClip, Camera.main.transform.position);
         Runner r = target.GetComponent<Runner>( );
 		int c1 = this.Controller;
 		this._controller = r.Controller;
