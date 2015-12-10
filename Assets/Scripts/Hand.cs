@@ -11,7 +11,7 @@ public class Hand : Player {
     [SerializeField]
     private Canvas _canvas;
     private bool cooldown;
-	[SerializeField] private AudioClip _tagClip;
+	[SerializeField] private AudioClip[] _clips;
 	// Use this for initialization
 
 	public override void Start () {
@@ -60,7 +60,7 @@ public class Hand : Player {
     }
     public override void Ability1 ( )
     {
-
+		AudioSource.PlayClipAtPoint(_clips[1], Camera.main.transform.position - new Vector3(5,0,0));
         GetComponent<Rigidbody>( ).AddForce( transform.right * 200 );
         GetComponent<Rigidbody>( ).AddForce( 0, 300, 0 );
         _cooldown.transform.localScale = new Vector3(0,1f,0);
@@ -81,7 +81,7 @@ public class Hand : Player {
 	void Tag(GameObject target)
 	{
 		Camera.main.GetComponent<CameraTurner>().DoShake();
-		AudioSource.PlayClipAtPoint(_tagClip, Camera.main.transform.position);
+		AudioSource.PlayClipAtPoint(_clips[0], Camera.main.transform.position);
         Runner r = target.GetComponent<Runner>( );
 		int c1 = this.Controller;
 		this._controller = r.Controller;
