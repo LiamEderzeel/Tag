@@ -11,6 +11,7 @@ public class MenuMain : MonoBehaviour
     [SerializeField] private Sprite[] _sprites= new Sprite[6];
     [SerializeField] private Image[] _images= new Image[3];
     private bool input = true;
+    private float _timer;
 
     private void Awake ()
     {
@@ -19,9 +20,14 @@ public class MenuMain : MonoBehaviour
 
     private void Update ()
     {
+        if(Time.time > _timer)
+        {
+        input = true;
+        }
 
         if(Input.GetButtonDown("A1") || Input.GetButtonDown("A2") || Input.GetButtonDown("A3") || Input.GetButtonDown("A4"))
         {
+        input = true;
             if(_menuMainState == MenuMainState.Play)
             {
                 _menuManager.SetReady();
@@ -38,7 +44,9 @@ public class MenuMain : MonoBehaviour
 
         if(input)
         {
-            StartCoroutine(WaitControlles(0.5f));
+            input = false;
+            Timer();
+            //StartCoroutine(WaitControlles(0.5f));
             if(Input.GetAxis("Vertical") > 0)
             {
                 ChangeState(_menuMainState, true);
@@ -48,6 +56,11 @@ public class MenuMain : MonoBehaviour
                 ChangeState(_menuMainState, false);
             }
         }
+    }
+
+    private void Timer()
+    {
+            _timer = Time.time + 0.5f;
     }
 
     private  void ChangeState( MenuMainState lastState, bool up)
