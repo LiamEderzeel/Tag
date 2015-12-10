@@ -80,6 +80,7 @@ public class Hand : Player {
 	}
 	void Tag(GameObject target)
 	{
+		Camera.main.GetComponent<CameraTurner>().DoShake();
 		AudioSource.PlayClipAtPoint(_tagClip, Camera.main.transform.position);
         Runner r = target.GetComponent<Runner>( );
 		int c1 = this.Controller;

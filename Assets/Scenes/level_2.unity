@@ -8423,6 +8423,8 @@ MonoBehaviour:
   _height: 30
   _lookAt: {fileID: 1104632222}
   _turningSpeed: .00999999978
+  shakeAmount: .980000019
+  decreaseFactor: .100000001
 --- !u!1001 &1469860388
 Prefab:
   m_ObjectHideFlags: 0
